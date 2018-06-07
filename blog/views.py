@@ -5,7 +5,7 @@ import json
 # Create your views here.
 
 """
-    返回
+    返回主页设置
     
     /get_index_setting/  get 方式
     
@@ -19,6 +19,7 @@ import json
 def get_index_setting(request):
 
     return HttpResponse(db.site_info())
+
 
 def get_user(request):
 
@@ -110,13 +111,41 @@ def get_article(request):
 
         return HttpResponse("not get")
 
+
+
+'''
+    /get_user_site_setting/  post 方式
+    参数 user_id
+
+    返回值用户设置
+        {
+            "blog_info": "怕是个肥狗子哦！",
+            "blog_bgm": null,
+            "blog_head_color": "#545454",
+            "blog_name": "huanghei"
+        }
+'''
+
+
 def get_user_site_setting(request):
 
-    pass
+    if request.method == 'POST':
 
-def get_user_article_title_id(request):
+        if request.POST.get('user_id',False):
 
-    pass
+            return HttpResponse(db.get_user_setting(request.POST['user_id']))
+
+        else:
+
+            return HttpResponse(json.dumps({
+                'error':'请给我一个用户ID!'
+            }))
+
+
+    else:
+
+        return HttpResponse('not get')
+
 
 
 

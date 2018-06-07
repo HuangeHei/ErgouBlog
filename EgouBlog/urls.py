@@ -22,4 +22,5 @@ urlpatterns = [
     path('get_user_list/', blog.get_user_list),
     path('get_index_setting/', blog.get_index_setting),
     path('get_article/', blog.get_article),
+    path('get_user_site_setting/', blog.get_user_site_setting),
 ]

@@ -34,15 +34,26 @@ def get_user_list():
 
 def site_info():
 
-    obj = Site.objects.get(id=1)
 
-    return json.dumps({
+        obj = Site.objects.all()
 
-        'index_setting':obj.index_setting,
-        'index_head_color':obj.index_head_color,
-        'index_notice':obj.index_notice,
+        if obj:
+            obj = obj[0]
+            return json.dumps({
 
-    })
+                'index_setting': obj.index_setting,
+                'index_head_color': obj.index_head_color,
+                'index_notice': obj.index_notice,
+
+            })
+
+        else:
+
+            return json.dumps({
+                'error':'后台无主页设置，请联系后台管理员'
+            })
+
+
 
 def get_article(article_id = False,user_id = False):
 
@@ -60,7 +71,9 @@ def get_article(article_id = False,user_id = False):
 
         except Exception as E:
 
-            return '您提供的user有误，或者无此文章 错误信息:%s' % E
+            return json.dumps({
+                'error':'您提供的用户有误，或者无此文章'
+            })
 
     for item in article_list:
 
@@ -90,4 +103,30 @@ def get_article(article_id = False,user_id = False):
         article_modify_date = models.DateTimeField(auto_now_add=True)             # 文章修改日期
         article_pageviews = models.IntegerField(default=0)                        # 文章阅读量
         article_ding = models.IntegerField(default=0)    
+    '''
+
+
+def get_user_setting(user_id):
+
+    try :
+        user_obj = User.objects.get(id = user_id)
+        site_obj = user_obj.user_site
+    except Exception as E:
+        return {
+            'error':'获取不到用户，请检查',
+        }
+
+    return json.dumps({
+        'blog_name':site_obj.blog_name,
+        'blog_info': site_obj.blog_info,
+        'blog_head_color': site_obj.blog_head_color,
+        'blog_bgm': site_obj.blog_bgm,
+
+    })
+
+    '''
+        blog_name = models.CharField(max_length=30,null=False,blank=False)                           # 用户博客名称
+        blog_info = models.CharField(max_length=80,null=False,blank=False,default="怕是个肥狗子哦！")  # 用户博客简介
+        blog_head_color = models.CharField(max_length=10,null=False,blank=False,default='#545454')   # 用户头颜色
+        blog_bgm = models.CharField(max_length=100,null=True,blank=True)                             # 用户博客BGM
     '''
