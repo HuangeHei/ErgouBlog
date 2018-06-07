@@ -23,4 +23,6 @@ urlpatterns = [
     path('get_index_setting/', blog.get_index_setting),
     path('get_article/', blog.get_article),
     path('get_user_site_setting/', blog.get_user_site_setting),
+    path('get_article_class/', blog.get_article_class),
+
 ]

@@ -43,8 +43,45 @@ def get_user_list(request):
 
     return HttpResponse(db.get_user_list())
 
-def article_class(request):
-    pass
+
+"""
+    返回所有分类
+
+    /get_user_list/  post 方式
+    
+    可传参数 user_id
+
+    返回值
+        [
+            {
+                "class_id": 1,
+                "class_name": "HTML 分类"
+            },
+            {
+                "class_id": 2,
+                "class_name": "CSS 分类"
+            },
+            {
+                "class_id": 3,
+                "class_name": "Python 分类"
+            },
+            {
+                "class_id": 4,
+                "class_name": "Django 分类"
+            }
+        ]
+"""
+
+
+def get_article_class(request):
+
+    if request.POST.get('user_id',False):
+        return HttpResponse(db.get_article_class(user_id = request.POST['user_id']))
+    else:
+        return HttpResponse(db.get_article_class())
+
+
+
 
 
 '''

@@ -21,14 +21,7 @@ def get_user_list():
             'user_name':item.user_name,
         })
 
-    '''
-        user_name = models.CharField(max_length=1024,null=False,blank=False)      # 用户名
-        user_passwd = models.CharField(max_length=1024, null=False, blank=False)  # 用户密码
-        user_head  = models.CharField(max_length=1024,null=False,blank=False)     # 用户 head 头
-        user_article = models.ManyToManyField(Article)                            # 用户文章
-        user_article_class = models.ManyToManyField(ArticleClass)                 # 用户文章分类
-        user_site = models.ForeignKey(UserSite,on_delete=models.CASCADE)          # 用户主页设置
-    '''
+
 
     return json.dumps(ret)
 
@@ -85,7 +78,8 @@ def get_article(article_id = False,user_id = False):
                 "article_date": item.article_date.strftime("%Y-%m-%d %H:%M:%S"),
                 "article_modify_date": item.article_modify_date.strftime("%Y-%m-%d %H:%M:%S"),
                 "article_pageviews": item.article_pageviews,
-                "article_ding":item.article_ding
+                "article_ding":item.article_ding,
+                "article_class":item.article_class.class_name,
             }
         )
 
@@ -95,15 +89,6 @@ def get_article(article_id = False,user_id = False):
         return json.dumps(ret)
     else:
         return json.dumps(ret[0])
-
-    '''
-        article_title = models.CharField(max_length=200,null=False,blank=False)   # 文章标题
-        article_text = models.TextField()                                         # 文章内容
-        article_date = models.DateTimeField(auto_now_add=True)                    # 文章初始日期
-        article_modify_date = models.DateTimeField(auto_now_add=True)             # 文章修改日期
-        article_pageviews = models.IntegerField(default=0)                        # 文章阅读量
-        article_ding = models.IntegerField(default=0)    
-    '''
 
 
 def get_user_setting(user_id):
@@ -124,9 +109,31 @@ def get_user_setting(user_id):
 
     })
 
-    '''
-        blog_name = models.CharField(max_length=30,null=False,blank=False)                           # 用户博客名称
-        blog_info = models.CharField(max_length=80,null=False,blank=False,default="怕是个肥狗子哦！")  # 用户博客简介
-        blog_head_color = models.CharField(max_length=10,null=False,blank=False,default='#545454')   # 用户头颜色
-        blog_bgm = models.CharField(max_length=100,null=True,blank=True)                             # 用户博客BGM
-    '''
+
+def get_article_class(user_id = False):
+
+    if user_id:
+        try:
+            user_obj = User.objects.get(id = user_id)
+
+        except Exception as E:
+
+            return json.dumps({
+                'error':'请注意用户ID是否正确！'
+            })
+
+        article_class = user_obj.user_article_class.all()
+
+    else:
+        article_class = ArticleClass.objects.all()
+
+    ret = []
+
+    for item in article_class:
+        ret.append({
+            'class_id':item.id,
+            'class_name':item.class_name
+        })
+
+
+    return json.dumps(ret)
