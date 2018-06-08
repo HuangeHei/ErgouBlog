@@ -1,4 +1,5 @@
 from django.shortcuts import render,HttpResponse
+
 from blog import dataHelper as db
 import json
 
@@ -16,10 +17,13 @@ import json
             "index_notice": "我是来逗比的公告~"
         }
 """
+
+
 def get_index_setting(request):
-
-    return HttpResponse(db.site_info())
-
+    if request.method == 'GET':
+        return HttpResponse(db.site_info())
+    else:
+        return HttpResponse('not post')
 
 def get_user(request):
 
@@ -41,7 +45,13 @@ def get_user(request):
 
 def get_user_list(request):
 
-    return HttpResponse(db.get_user_list())
+    if request.method == 'GET':
+
+        return HttpResponse(db.get_user_list())
+
+    else:
+
+        return HttpResponse('not post')
 
 
 """
@@ -74,12 +84,13 @@ def get_user_list(request):
 
 
 def get_article_class(request):
-
-    if request.POST.get('user_id',False):
-        return HttpResponse(db.get_article_class(user_id = request.POST['user_id']))
+    if request.method == 'POST':
+        if request.POST.get('user_id',False):
+            return HttpResponse(db.get_article_class(user_id = request.POST['user_id']))
+        else:
+            return HttpResponse(db.get_article_class())
     else:
-        return HttpResponse(db.get_article_class())
-
+        return HttpResponse('not get')
 
 
 
