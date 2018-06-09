@@ -1,5 +1,5 @@
 from django.shortcuts import render,HttpResponse
-
+from blog.Auth import Auth
 from blog import dataHelper as db
 import json
 
@@ -192,6 +192,36 @@ def get_user_site_setting(request):
 
     else:
 
+        return HttpResponse('not get')
+
+
+
+def login(request):
+
+    if request.method == 'POST':
+
+        user_name = request.POST.get('user_name',False)
+        user_passwd = request.POST.get('user_passwd',False)
+
+        if user_name and user_passwd:
+            print(user_name,user_passwd)
+            if Auth.is_login(user_name,user_passwd,request)['status']:
+
+                return HttpResponse(json.dumps({
+                    'status': True,
+                }))
+            else:
+                return HttpResponse(json.dumps({
+                    'status': False,
+                    'error': '用户名或密码错误!'
+                }))
+
+        else:
+            return HttpResponse(json.dumps({
+                'status':False,
+                'error':'用户名密码为空!'
+            }))
+    else:
         return HttpResponse('not get')
 
 

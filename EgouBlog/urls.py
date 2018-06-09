@@ -24,5 +24,8 @@ urlpatterns = [
     path('get_article/', blog.get_article),
     path('get_user_site_setting/', blog.get_user_site_setting),
     path('get_article_class/', blog.get_article_class),
+    path('login/', blog.login),
+    path('get_login/', admin.site.urls),
+    path('out/', admin.site.urls),
 
 ]
