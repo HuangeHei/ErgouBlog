@@ -132,3 +132,40 @@ STATICFILES_DIRS = [
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
+
+# 日志配置
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s %(levelname)-8s %(message)s'
+        },
+        'detail': {
+            'format': '%(asctime)s %(levelname)-8s %(pathname)s[line:%(lineno)d] %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': './r.log',
+            'maxBytes': 1024 * 1024 * 5,  # 5 MB
+            'backupCount': 100,
+            'formatter': 'detail',
+        },
+    },
+    'loggers': {
+        'blog_info': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'blog_django': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}

@@ -6,7 +6,7 @@ class Auth():
     @classmethod
     def login_status(cls,req):
 
-        if  req.session.get('user_name',False) and (req.session.get('user_name',False) == True):
+        if  req.session.get('user_name',False) and (req.session.get('status',False) == True):
             return {
                 'status':True,
                 'user_name':req.session['user_name']
@@ -59,7 +59,7 @@ class Auth():
     @classmethod
     def out_login(cls,req):
         ret_buf = cls.login_status(req)
-        if ret_buf.status:
+        if ret_buf['status']:
 
             req.session.delete() # 进行注销
 

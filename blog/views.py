@@ -2,6 +2,9 @@ from django.shortcuts import render,HttpResponse
 from blog.Auth import Auth
 from blog import dataHelper as db
 import json
+import logging
+log = logging.getLogger(__name__)
+
 
 # Create your views here.
 
@@ -206,7 +209,7 @@ def login(request):
         if user_name and user_passwd:
             print(user_name,user_passwd)
             if Auth.is_login(user_name,user_passwd,request)['status']:
-
+                log.info("用户尝试登陆 登录名:%s" % user_name)
                 return HttpResponse(json.dumps({
                     'status': True,
                 }))
@@ -225,6 +228,44 @@ def login(request):
         return HttpResponse('not get')
 
 
+def out(request):
+
+    if request.method == 'POST':
+
+        ret = Auth.out_login(request)
+
+        if ret['status']:
+            return HttpResponse(json.dumps({
+                'status':True
+            }))
+        else:
+            return HttpResponse(json.dumps({
+                'sataus':False,
+                'error':ret['error']
+            }))
+
+    else:
+
+        return HttpResponse('not get')
+
+
+def get_login_status(request):
+
+
+    if request.method == 'GET':
+
+        ret = Auth.login_status(request)
+
+        if ret['status']:
+            return HttpResponse(json.dumps(ret))
+        else:
+            return HttpResponse(json.dumps({
+                'status': False
+            }))
+
+    else:
+
+        return HttpResponse('not post')
 
 
 

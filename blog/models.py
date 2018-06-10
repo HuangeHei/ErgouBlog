@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 
 
+
 from django.db import models
 
 # Create your models here.
@@ -59,7 +60,7 @@ class User(models.Model):
     user_head  = models.CharField(max_length=1024,null=False,blank=False)     # 用户 head 头
     user_article = models.ManyToManyField(Article)                            # 用户文章
     user_article_class = models.ManyToManyField(ArticleClass)                 # 用户文章分类
-    user_site = models.ForeignKey(UserSite,on_delete = models.CASCADE)          # 用户主页设置
+    user_site = models.ForeignKey(UserSite,on_delete = models.CASCADE)        # 用户主页设置
 
 
     def __str__(self):
