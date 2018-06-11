@@ -3,7 +3,8 @@ from blog.Auth import Auth
 from blog import dataHelper as db
 import json
 import logging
-log = logging.getLogger(__name__)
+print(__name__)
+log = logging.getLogger('is')  # 参数是 定义好的 logger
 
 
 # Create your views here.
@@ -47,7 +48,9 @@ def get_user(request):
 """
 
 def get_user_list(request):
-
+    print('123')
+    log.info('ok')
+    log.warning('ok')
     if request.method == 'GET':
 
         return HttpResponse(db.get_user_list())
