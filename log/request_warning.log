@@ -1,0 +1,19 @@
+2018-06-11 10:24:51,514 WARNING  C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /favicon.ico HTTP/1.1" 404 2878
+2018-06-11 10:24:55,434 WARNING  C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /favicon.ico HTTP/1.1" 404 2878
+2018-06-11 10:27:50,591 WARNING  C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /favicon.ico HTTP/1.1" 404 2878
+2018-06-11 10:28:20,237 WARNING  C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /favicon.ico HTTP/1.1" 404 2878
+2018-06-11 10:29:51,233 WARNING  C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /favicon.ico HTTP/1.1" 404 2878
+2018-06-11 10:30:39,188 WARNING  C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /favicon.ico HTTP/1.1" 404 2878
+2018-06-11 11:29:42,741 WARNING  C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /favicon.ico HTTP/1.1" 404 2878
+2018-06-11 13:08:48,532 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /get_user_list/ HTTP/1.1" 500 75063
+2018-06-11 13:12:02,819 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /get_user_list/ HTTP/1.1" 500 72480
+2018-06-11 13:13:40,111 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /get_user_list/ HTTP/1.1" 500 72525
+2018-06-11 13:13:47,347 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /get_user_list/ HTTP/1.1" 500 72525
+2018-06-11 13:14:31,952 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /get_user_list/ HTTP/1.1" 500 72541
+2018-06-11 13:37:28,735 ERROR    "GET /get_user_list/ HTTP/1.1" 500 72822
+2018-06-11 13:38:05,755 ERROR    "GET /get_user_list/ HTTP/1.1" 500 72446
+2018-06-11 13:38:54,062 ERROR    "GET /get_user_list/ HTTP/1.1" 500 72648
+2018-06-11 13:39:25,332 ERROR    "GET /get_user_list/ HTTP/1.1" 500 72670
+2018-06-11 13:47:19,090 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /get_user_list/ HTTP/1.1" 500 69216
+2018-06-11 13:47:26,848 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /get_user_list/ HTTP/1.1" 500 72829
+2018-06-11 16:38:56,562 WARNING  C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET / HTTP/1.1" 404 2827

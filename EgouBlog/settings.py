@@ -152,31 +152,85 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
-        'detail': {
+        'default': {
             'format': '%(asctime)s %(levelname)-8s %(pathname)s[line:%(lineno)d] %(message)s'
+            # 'format': '%(asctime)s %(levelname)-8s %(pathname)s[line:%(lineno)d] %(message)s'
+        },
+        'my_logHelper': {
+            'format': '%(asctime)s %(levelname)-8s %(message)s'
+            #'format': '%(asctime)s %(levelname)-8s %(pathname)s[line:%(lineno)d] %(message)s'
+        },
+        'request': {
+            'format': '%(asctime)s %(levelname)-8s %(pathname)s[line:%(lineno)d] %(message)s'
+            # 'format': '%(asctime)s %(levelname)-8s %(pathname)s[line:%(lineno)d] %(message)s'
         },
     },
     'handlers': {
         'file': {
             'level': 'INFO',                                  # 日志分发级别
-            'class': 'logging.handlers.RotatingFileHandler',  # 日志分发方式或日志切割方式
-            'filename': './info.log',
-            'maxBytes': 1024 * 1024 * 5,                      # 5 MB
+            'class': 'logging.handlers.TimedRotatingFileHandler',  # 日志分发方式或日志切割方式
+            'filename': './log/info.log',
+           #'maxBytes': 1024 * 1024 * 5,                      # 5 MB
+            'when':'D',
             'backupCount': 100,
-            'formatter': 'detail',
+            'formatter': 'my_logHelper',
+            'encoding':'utf-8'
         },
         'files': {
-            'level': 'WARNING',                                  # 日志分发级别
-            'class': 'logging.handlers.RotatingFileHandler',  # 日志分发方式或日志切割方式
-            'filename': './warning.log',
-            'maxBytes': 1024 * 1024 * 5,                      # 5 MB
+            'level': 'WARNING',                                    # 日志分发级别
+            'class': 'logging.handlers.TimedRotatingFileHandler',  # 日志分发方式或日志切割方式
+            'filename': './log/warning.log',
+           # 'maxBytes': 1024 * 1024 * 5,                          # 5 MB
+            'when':'D',
             'backupCount': 100,
-            'formatter': 'detail',
+            'formatter': 'my_logHelper',
+            'encoding':'utf-8'
+        },
+        'request': {
+            'level': 'INFO',                                       # 日志分发级别
+            'class': 'logging.handlers.TimedRotatingFileHandler',  # 日志分发方式或日志切割方式
+            'filename': './log/request.log',
+           # 'maxBytes': 1024 * 1024 * 5,                          # 5 MB
+            'when':'D',                                            # 一天一日志
+            'backupCount': 100,
+            'formatter': 'request',
+            'encoding':'utf-8'
+        },
+        'request_warning': {
+            'level': 'WARNING',                                    # 日志分发级别
+            'class': 'logging.handlers.TimedRotatingFileHandler',  # 日志分发方式或日志切割方式
+            'filename': './log/request_warning.log',               # 一天一日志
+           # 'maxBytes': 1024 * 1024 * 5,                          # 5 MB
+            'when':'D',
+            'backupCount': 100,
+            'formatter': 'request',
+            'encoding':'utf-8'
+        },
+        'system': {
+            'level': 'WARNING',  # 日志分发级别
+            'class': 'logging.handlers.TimedRotatingFileHandler',   # 日志分发方式或日志切割方式
+            'filename': './system.log',                # 系统错误，请移交到别的盘
+            # 'maxBytes': 1024 * 1024 * 5,                          # 5 MB
+            'when': 'D',
+            'backupCount': 100,
+            'formatter': 'default',
+            'encoding':'utf-8'
+
         },
     },
     'loggers': {
-        'is': {
+        'log': {
             'handlers': ['file','files'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'django.server': {
+            'handlers': ['request','request_warning'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'system': {
+            'handlers': ['system'],
             'level': 'INFO',
             'propagate': True,
         },

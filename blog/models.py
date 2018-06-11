@@ -8,6 +8,15 @@ from django.db import models
 
 # Create your models here.
 
+
+class Auth(models.Model):
+
+    auth_name = models.CharField(max_length=30,null=False,blank=False)                           # 权限名称
+
+    def __str__(self):
+        return self.auth_name
+
+
 class UserSite(models.Model):
 
     blog_name = models.CharField(max_length=30,null=False,blank=False)                           # 用户博客名称
@@ -47,7 +56,8 @@ class Article(models.Model):
     article_modify_date = models.DateTimeField(auto_now_add=True)             # 文章修改日期
     article_pageviews = models.IntegerField(default=0)                        # 文章阅读量
     article_ding = models.IntegerField(default=0)                             # 文章点赞量
-    article_class= models.ForeignKey(ArticleClass,on_delete = models.CASCADE)
+    article_class = models.ForeignKey(ArticleClass,on_delete = models.CASCADE) # 文章分类
+    article_is_save = models.BooleanField(default=False)                      # 是否为存稿
 
     def __str__(self):
         return self.article_title
@@ -61,9 +71,10 @@ class User(models.Model):
     user_article = models.ManyToManyField(Article)                            # 用户文章
     user_article_class = models.ManyToManyField(ArticleClass)                 # 用户文章分类
     user_site = models.ForeignKey(UserSite,on_delete = models.CASCADE)        # 用户主页设置
-
+    user_auth = models.ForeignKey(Auth,null=True,blank=True,on_delete = models.CASCADE)  # 用户权限
 
     def __str__(self):
+
         return self.user_name
 
 

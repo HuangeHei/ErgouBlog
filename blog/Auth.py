@@ -1,6 +1,8 @@
-from blog.models import User
-
-
+from blog.models import User,Auth
+from django.shortcuts import render,HttpResponse
+from blog.helper.logHelper import logHelper
+log_system = logHelper('system')
+log_server = logHelper('log')
 class Auth():
 
     @classmethod
@@ -75,6 +77,53 @@ class Auth():
                 'error':'并没有登录!'
             }
 
+    @classmethod
+    def auth(cls,root):
+
+        def outer_wrapper(func):
+            def wap(*args, **kwargs):
+
+                try:
+
+                    root_obj = Auth.objects.get(root_name = root)  # 这一步主要怕蠢萌程序员
+
+                except Exception as E:
+
+                    print('程序内部')  # 内部报错信息 以后写入到日志系统中
+                    return HttpResponse('程序内部发生问题')
+
+                if cls.is_login(args[1]):
+
+                    try:
+
+                        obj = User.objects.get(user_name=args[1].session['user_name'])
+
+                        try:
+                            is_ok = obj.user_root.filter(root_name=root_obj.root_name)
+
+                        except Exception as e:
+
+                            return HttpResponse('用户权限获取失败')
+
+                    except Exception as e:
+
+                        return HttpResponse('not,用户不存在')
+
+                    if is_ok:
+
+                        return func(*args, **kwargs)  # 执行函数
+
+                    else:
+
+                        return HttpResponse('not,无权限')
+
+                else:
+
+                    return HttpResponse('not,没有登录')
+
+            return wap
+
+        return outer_wrapper
 
 
 

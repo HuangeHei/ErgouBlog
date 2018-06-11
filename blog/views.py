@@ -2,12 +2,173 @@ from django.shortcuts import render,HttpResponse
 from blog.Auth import Auth
 from blog import dataHelper as db
 import json
-import logging
-print(__name__)
-log = logging.getLogger('is')  # 参数是 定义好的 logger
-
+from blog.helper.logHelper import logHelper
+log = logHelper('log')
 
 # Create your views here.
+
+#----------------------------------------- 用户登录相关 开始 -------------------------------------------------
+
+''' 用户登录
+
+    /login/  post 方式
+
+    参数 {
+            user_name:'123',
+            user_passwd:'123'
+        }
+
+
+        登录成功
+        {
+            "status": true
+        }
+        登录失败
+        {
+            "status":false
+            "error":'用户名或密码错误!'
+        }
+        如果账号或密码为空
+        {   
+            'status':false,
+            'error':'用户名密码为空!'
+        }
+'''
+
+
+def login(request):
+    if request.method == 'POST':
+
+        user_name = request.POST.get('user_name', False)
+        user_passwd = request.POST.get('user_passwd', False)
+
+        if user_name and user_passwd:
+
+            if Auth.is_login(user_name, user_passwd, request)['status']:
+
+                log.w(("用户登录成功 USER_NAME:%s" % user_name), 'info', log.get_access_ip(request))
+
+                return HttpResponse(json.dumps({
+                    'status': True,
+                }))
+
+            else:
+
+                log.w("用户名或密码错误", 'error', log.get_access_ip(request))
+
+                return HttpResponse(json.dumps({
+                    'status': False,
+                    'error': '用户名或密码错误!'
+                }))
+
+        else:
+
+            log.w("用户名密码为空", 'error', log.get_access_ip(request))
+
+            return HttpResponse(json.dumps({
+                'status': False,
+                'error': '用户名密码为空!'
+            }))
+
+    else:
+
+        log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
+
+        return HttpResponse('not get')
+
+
+''' 用户注销
+
+    /out/  post 方式
+
+        注销成功
+        {
+            "status": true
+        }
+        注销失败
+        {
+            "status":false
+            "error":'error'
+        }
+'''
+
+
+def out(request):
+    if request.method == 'POST':
+
+        ret = Auth.out_login(request)
+
+        if ret['status']:
+
+            log.w("用户注销成功", 'info', log.get_access_ip(request))
+
+            return HttpResponse(json.dumps({
+                'status': True
+            }))
+
+        else:
+
+            log.w(("用户注销失败 错误信息:%s" % ret['error']), 'error', log.get_access_ip(request))
+
+            return HttpResponse(json.dumps({
+                'sataus': False,
+                'error': ret['error']
+            }))
+
+    else:
+
+        log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
+
+        return HttpResponse('not get')
+
+
+'''获取用户登录属性
+
+    /get_login/  post 方式
+
+        获取成功
+        {
+            "status": true
+            "user_name": 'user_name'
+        }
+        获取失败
+        {
+            "status":false
+        }
+
+'''
+
+
+def get_login_status(request):
+    if request.method == 'GET':
+
+        ret = Auth.login_status(request)
+
+        if ret['status']:
+
+            log.w("获取用户登录状态成功", 'info', log.get_access_ip(request))
+
+            return HttpResponse(json.dumps(ret))
+
+        else:
+
+            log.w("获取用户登录状态失败", 'info', log.get_access_ip(request))
+
+            return HttpResponse(json.dumps({
+                'status': False
+            }))
+
+    else:
+
+        log.w("错误的访问，无 POST", 'error', log.get_access_ip(request))
+
+        return HttpResponse('not post')
+
+
+#------------------------------------------ 用户登录相关 结束 ------------------------------------------------
+
+
+#----------------------------------------- 前端展示,无需权限 开始 ---------------------------------------------
 
 """
     返回主页设置
@@ -24,14 +185,21 @@ log = logging.getLogger('is')  # 参数是 定义好的 logger
 
 
 def get_index_setting(request):
+
     if request.method == 'GET':
+
+        log.w("获取主页设置", 'info', log.get_access_ip(request))
+
         return HttpResponse(db.site_info())
+
     else:
+
+        log.w("错误的访问，无 POST", 'error', log.get_access_ip(request))
+
         return HttpResponse('not post')
 
-def get_user(request):
 
-    return HttpResponse(db.get_user_list())
+
 
 """
     返回所有用户
@@ -48,14 +216,20 @@ def get_user(request):
 """
 
 def get_user_list(request):
-    print('123')
-    log.info('ok')
-    log.warning('ok')
+
+
+
+
+
     if request.method == 'GET':
+
+        log.w('获取了全部用户列表', 'info', ip=log.get_access_ip(request))
 
         return HttpResponse(db.get_user_list())
 
     else:
+
+        log.w("错误的访问，无 POST", 'error', log.get_access_ip(request))
 
         return HttpResponse('not post')
 
@@ -90,12 +264,26 @@ def get_user_list(request):
 
 
 def get_article_class(request):
+
     if request.method == 'POST':
+
         if request.POST.get('user_id',False):
-            return HttpResponse(db.get_article_class(user_id = request.POST['user_id']))
+
+            user_id = request.POST['user_id']
+
+            log.w(('获取用户文章分类USER_ID:%s' % user_id) ,'info',log.get_access_ip(request))
+
+            return HttpResponse(db.get_article_class(user_id = user_id))
+
         else:
+
+            log.w('获取所有用户文章分类','info', log.get_access_ip(request))
+
             return HttpResponse(db.get_article_class())
     else:
+
+        log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
+
         return HttpResponse('not get')
 
 
@@ -147,6 +335,8 @@ def get_article(request):
 
             user_id = request.POST['user_id']
 
+            log.w(('获取用户所有文章 USER_ID:%s' % user_id), 'info', log.get_access_ip(request))
+
             return HttpResponse(db.get_article(user_id = user_id))
 
         else:
@@ -155,13 +345,22 @@ def get_article(request):
 
                 article_id = request.POST.get('article_id',False)
 
+                log.w(('获取文章 ARTICLE_ID:%s' % article_id), 'info', log.get_access_ip(request))
+
                 return HttpResponse(db.get_article(article_id))
 
             except Exception as E:
 
-                return HttpResponse(json.dumps('cuole'))
+                log.w(("获取单个文章出错 错误信息:%s" % E),'error', log.get_access_ip(request))
+
+                return HttpResponse(json.dumps({
+                    'status':False,
+                    'error':'获取单个文章出错，详细见日志'
+                }))
 
     else:
+
+        log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
 
         return HttpResponse("not get")
 
@@ -187,11 +386,18 @@ def get_user_site_setting(request):
 
         if request.POST.get('user_id',False):
 
-            return HttpResponse(db.get_user_setting(request.POST['user_id']))
+            user_id = request.POST['user_id']
+
+            log.w(('获取用户设置 USER_ID:%s' % user_id), 'info', log.get_access_ip(request))
+
+            return HttpResponse(db.get_user_setting(user_id))
 
         else:
 
+            log.w('获取用户设置失败，因为没有USER_ID', 'error', log.get_access_ip(request))
+
             return HttpResponse(json.dumps({
+                'status':False,
                 'error':'请给我一个用户ID!'
             }))
 
@@ -200,80 +406,10 @@ def get_user_site_setting(request):
 
         return HttpResponse('not get')
 
+#----------------------------------------- 前端展示,无需权限 结束 ---------------------------------------------
 
-
-def login(request):
-
-    if request.method == 'POST':
-
-        user_name = request.POST.get('user_name',False)
-        user_passwd = request.POST.get('user_passwd',False)
-
-        if user_name and user_passwd:
-            print(user_name,user_passwd)
-            if Auth.is_login(user_name,user_passwd,request)['status']:
-                log.info("用户尝试登陆 登录名:%s" % user_name)
-                return HttpResponse(json.dumps({
-                    'status': True,
-                }))
-            else:
-                return HttpResponse(json.dumps({
-                    'status': False,
-                    'error': '用户名或密码错误!'
-                }))
-
-        else:
-            return HttpResponse(json.dumps({
-                'status':False,
-                'error':'用户名密码为空!'
-            }))
-    else:
-        return HttpResponse('not get')
-
-
-def out(request):
-
-    if request.method == 'POST':
-
-        ret = Auth.out_login(request)
-
-        if ret['status']:
-            return HttpResponse(json.dumps({
-                'status':True
-            }))
-        else:
-            return HttpResponse(json.dumps({
-                'sataus':False,
-                'error':ret['error']
-            }))
-
-    else:
-
-        return HttpResponse('not get')
-
-
-def get_login_status(request):
-
-
-    if request.method == 'GET':
-
-        ret = Auth.login_status(request)
-
-        if ret['status']:
-            return HttpResponse(json.dumps(ret))
-        else:
-            return HttpResponse(json.dumps({
-                'status': False
-            }))
-
-    else:
-
-        return HttpResponse('not post')
+#----------------------------------------- 前端后台设置,需要权限 开始 ---------------------------------------------
 
 
 
-
-
-
-
-
+#----------------------------------------- 前端后台设置,需要权限 结束 ---------------------------------------------

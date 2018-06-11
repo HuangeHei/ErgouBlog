@@ -82,6 +82,7 @@ def get_article(article_id = False,user_id = False):
                 "article_pageviews": item.article_pageviews,
                 "article_ding":item.article_ding,
                 "article_class":item.article_class.class_name,
+                "article_is_save": item.article_is_save,
             }
         )
 
