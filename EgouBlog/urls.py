@@ -33,6 +33,8 @@ urlpatterns = [
     # set
 
     path('set_index/', blog.set_index),
+    path('set_user_site/', blog.set_user_site),
+    path('set_user/', blog.set_user),
 
     path('upload/', blog.upload_file),
 

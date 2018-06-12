@@ -149,10 +149,10 @@ def set_index(dic):
     try:
         site_obj = Site.objects.all()
     except Exception as E:
-        log.w('获取主页设置数据错误！错误信息:%s' % E,'error')
+        log.w('主页设置数据错误！错误信息:%s' % E,'error')
         return {
             'status':False,
-            'error' :'获取主页设置数据错误！错误信息:%s' % E
+            'error' :'主页设置数据错误！错误信息:%s' % E
         }
 
     try:
@@ -169,3 +169,78 @@ def set_index(dic):
     return {
         'status': True,
     }
+
+def set_user_site(user,dic):
+
+    try:
+        obj = UserSite.objects.filter(User__user_name = user)
+
+    except Exception as E:
+
+        log.w('查询用户错误！错误信息:%s' % E,'error')
+
+        return {
+            'status':False,
+            'error' :'查询用户错误！错误信息:%s' % E
+        }
+
+    try:
+
+        obj.update(**dic)
+
+    except Exception as E:
+
+        log.w('更新数据错误！错误信息:%s' % E, 'error')
+        return {
+            'status': False,
+            'error': '更新数据错误！错误信息:%s' % E
+        }
+
+    log.w('更新数据成功', 'info')
+
+    return {
+        'status': True,
+    }
+
+
+def update_user(user_name,user_passwd = None,user_head = None):
+
+    obj = User.objects.filter(user_name=user_name)
+
+    if obj:
+
+        try:
+            if user_passwd is not None:
+
+                obj.update(user_passwd = user_passwd)
+
+            elif user_head is not None:
+
+                obj.update(user_head = user_head)
+
+        except Exception as E:
+
+            log.w('更新数据错误！错误信息:%s' % E, 'error')
+            return {
+                'status': False,
+                'error': '更新数据错误！错误信息:%s' % E
+            }
+
+        log.w('更新数据成功', 'info')
+
+        return {
+            'status': True,
+        }
+
+    else:
+
+        log.w('更新数据错误！找不到用户' 'error')
+
+        return json.dumps({
+            'status':False,
+            'error':'找不到用户！'
+        })
+
+
+
+

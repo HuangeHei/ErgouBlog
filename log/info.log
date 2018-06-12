@@ -13,3 +13,25 @@
 2018-06-12 17:56:37,990 ERROR    D:\ergou\EgouBlog\blog\dataHelper.py[line:161] 更新数据错误！错误信息:'Site' object has no attribute 'update'
 2018-06-12 17:57:46,578 INFO     D:\ergou\EgouBlog\blog\dataHelper.py[line:167] 更新数据成功
 2018-06-12 17:58:18,156 INFO     D:\ergou\EgouBlog\blog\dataHelper.py[line:167] 更新数据成功
+2018-06-13 00:55:30,025 INFO     127.0.0.1 D:\ergou\ErgouBlog\blog\views.py[line:52] 用户登录成功 USER_NAME:Huanghei
+2018-06-13 00:56:23,000 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:193] 更新数据错误！错误信息:'QuerySet' object has no attribute 'user_site'
+2018-06-13 00:57:51,539 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:193] 更新数据错误！错误信息:'QuerySet' object has no attribute 'user_site'
+2018-06-13 00:58:13,661 INFO     D:\ergou\ErgouBlog\blog\dataHelper.py[line:199] 更新数据成功
+2018-06-13 00:58:30,971 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:193] 更新数据错误！错误信息:'UserSite' object has no attribute 'update'
+2018-06-13 00:58:40,505 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:193] 更新数据错误！错误信息:Manager isn't accessible via UserSite instances
+2018-06-13 00:59:16,469 INFO     D:\ergou\ErgouBlog\blog\dataHelper.py[line:199] 更新数据成功
+2018-06-13 01:03:58,054 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:180] 查询用户错误！错误信息:type object 'UserSite' has no attribute 'User_set'
+2018-06-13 01:04:10,223 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:180] 查询用户错误！错误信息:'Manager' object has no attribute 'User_set'
+2018-06-13 01:04:32,845 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:180] 查询用户错误！错误信息:'QuerySet' object has no attribute 'User_set'
+2018-06-13 01:10:30,164 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:180] 查询用户错误！错误信息:'Manager' object has no attribute 'filer'
+2018-06-13 01:10:42,476 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:180] 查询用户错误！错误信息:'Manager' object has no attribute 'filer'
+2018-06-13 01:12:34,995 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:193] 更新数据错误！错误信息:'QuerySet' object has no attribute 'user_site'
+2018-06-13 01:12:49,143 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:180] 查询用户错误！错误信息:Cannot resolve keyword 'user_user_name' into field. Choices are: blog_bgm, blog_head_color, blog_info, blog_name, id, user
+2018-06-13 01:13:14,830 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:180] 查询用户错误！错误信息:invalid literal for int() with base 10: 'Huanghei'
+2018-06-13 01:13:48,554 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:193] 更新数据错误！错误信息:'QuerySet' object has no attribute 'user_site'
+2018-06-13 01:14:17,688 INFO     D:\ergou\ErgouBlog\blog\dataHelper.py[line:199] 更新数据成功
+2018-06-13 01:15:51,872 ERROR    127.0.0.1 D:\ergou\ErgouBlog\blog\views.py[line:567] 信息POST不完整
+2018-06-13 01:16:08,867 INFO     D:\ergou\ErgouBlog\blog\dataHelper.py[line:167] 更新数据成功
+2018-06-13 01:32:19,152 INFO     D:\ergou\ErgouBlog\blog\dataHelper.py[line:229] 更新数据成功
+2018-06-13 01:33:47,236 INFO     D:\ergou\ErgouBlog\blog\dataHelper.py[line:229] 更新数据成功
+2018-06-13 01:33:57,675 INFO     D:\ergou\ErgouBlog\blog\dataHelper.py[line:229] 更新数据成功

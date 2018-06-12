@@ -28,3 +28,4 @@
 2018-06-12 16:47:15,983 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /set_index/ HTTP/1.1" 500 60689
 2018-06-12 16:47:18,395 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /set_index/ HTTP/1.1" 500 60289
 2018-06-12 17:57:56,303 WARNING  C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /favicon.ico HTTP/1.1" 404 3095
+2018-06-13 01:14:29,577 WARNING  C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /favicon.ico HTTP/1.1" 404 3209

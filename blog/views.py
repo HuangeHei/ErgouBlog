@@ -480,17 +480,16 @@ def upload_file(request):
             index_notice
         }
 
-    返回值 上传成功 和 文件名称
+    返回值 成功
         {
             'status':True,
-            'name': 'xxxxxxxxxxxxx'
         }
 
-        上传失败
+        失败
 
         {
             'status':False,
-            'error':'写入失败'
+            'error':'xxxx'
         }
 '''
 
@@ -499,17 +498,24 @@ def upload_file(request):
 def set_index(request):
 
     if request.method == 'POST':
+        try:
+            data = {
+                'index_setting':request.POST.get('index_setting', None),
+                'index_head_color':request.POST.get('index_head_color', None),
+                'index_notice':request.POST.get('index_notice', None)
+            }
+        except Exception as E:
 
-        data = {
-            'index_setting':request.POST.get('index_setting', None),
-            'index_head_color':request.POST.get('index_head_color', None),
-            'index_notice':request.POST.get('index_notice', None)
-        }
+            log.w("信息POST不完整", 'error', log.get_access_ip(request))
 
-        if data['index_setting'] is not None and data['index_head_color'] is not None and data['index_notice'] is not None:
-            return HttpResponse(json.dumps(db.set_index(data)))
-        else:
-            return HttpResponse('not')
+            return HttpResponse(json.dumps({
+                'status': False,
+                'error': '信息POST不完整'
+            }))
+
+
+        return HttpResponse(json.dumps(db.set_index(data)))
+
 
     else:
 
@@ -518,18 +524,116 @@ def set_index(request):
         return HttpResponse('not get')
 
 
+
+''' 设置用户个人站点信息
+
+    /set_user_site/  post   方式
+
+    参数  
+        {
+            blog_name 
+            blog_info 
+            blog_head_color 
+            blog_bgm 
+        }
+
+    返回值 成功
+    {
+        'status':True,
+    }
+    
+    失败
+    
+    {
+        'status':False,
+        'error':'xxxx'
+    }
+'''
+
 @Auth.auth()
-def set_in1dex(request):
+def set_user_site(request):
 
     if request.method == 'POST':
 
-        pass
+        try:
+            data = {
+                'blog_name':request.POST['blog_name'],
+                'blog_info':request.POST['blog_info'],
+                'blog_head_color':request.POST['blog_head_color'],
+                'blog_bgm':request.POST['blog_bgm'],
+            }
+        except Exception as E:
+
+            log.w("信息POST不完整", 'error', log.get_access_ip(request))
+
+            return HttpResponse(json.dumps({
+                'status': False,
+                'error': '信息POST不完整'
+            }))
+
+
+
+        return HttpResponse(json.dumps(db.set_user_site(request.session['user_name'],data)))
+
 
     else:
 
         log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
 
         return HttpResponse('not get')
+
+''' 修改用户密码
+
+    /user_passwd/  post  方式
+    
+    参数 {
+        user_passwd
+        或者
+        user_head
+    }
+
+    返回值 成功
+    {
+        'status':True,
+    }
+
+    失败
+
+    {
+        'status':False,
+        'error':'xxxx'
+    }
+'''
+
+@Auth.auth()
+def set_user(request):
+
+    if request.method == 'POST':
+
+
+            if request.POST.get('user_passwd',None) is not None:
+
+                return HttpResponse(json.dumps(db.update_user(request.session['user_name'], user_passwd=request.POST['user_passwd'])))
+
+            elif request.POST.get('user_head',None) is not None:
+
+                return HttpResponse(json.dumps(db.update_user(request.session['user_name'], user_head=request.POST['user_head'])))
+
+            else:
+
+                log.w("信息POST不完整", 'error', log.get_access_ip(request))
+
+                return HttpResponse(json.dumps({
+                    'status': False,
+                    'error': '信息POST不完整'
+                }))
+
+    else:
+
+        log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
+
+        return HttpResponse('not get')
+
 
 
 #----------------------------------------- 前端后台设置,需要权限 结束 ---------------------------------------------
