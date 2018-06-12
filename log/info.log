@@ -2,3 +2,14 @@
 2018-06-11 16:38:47,585 INFO     127.0.0.1 D:\ergou\EgouBlog\blog\views.py[line:63] 获取了全部用户列表
 2018-06-11 16:39:07,390 INFO     127.0.0.1 D:\ergou\EgouBlog\blog\views.py[line:28] 获取主页设置
 2018-06-11 17:12:57,790 INFO     127.0.0.1 D:\ergou\EgouBlog\blog\views.py[line:28] 获取主页设置
+2018-06-12 16:35:51,867 ERROR    127.0.0.1 D:\ergou\EgouBlog\blog\views.py[line:458] 文件上传成功 Huanghei
+2018-06-12 16:35:51,885 ERROR    D:\ergou\EgouBlog\blog\views.py[line:466] 文件保存错误 [Errno 2] No such file or directory: 'D:\\ergou\\EgouBlog\\static\\file_temp\\Sj3jGIEMOClmPy3i9AuwoFhXob0r.jpg\\3ond4WUmQBpb15sjK5dcICqOIwPw.jpg'
+2018-06-12 16:36:57,055 ERROR    127.0.0.1 D:\ergou\EgouBlog\blog\views.py[line:458] 文件上传成功 Huanghei
+2018-06-12 16:36:57,056 ERROR    D:\ergou\EgouBlog\blog\views.py[line:466] 文件保存错误 [Errno 2] No such file or directory: 'D:\\ergou\\EgouBlog\\static\\file_temp\\r2ivMvoQIr5cOCKsNAiLFVq5XBx6.jpg\\C2XsCltHlzqvXDS9BJJiGDCKKp8K.jpg'
+2018-06-12 16:37:21,320 ERROR    127.0.0.1 D:\ergou\EgouBlog\blog\views.py[line:458] 文件上传成功 Huanghei
+2018-06-12 16:37:21,321 ERROR    D:\ergou\EgouBlog\blog\views.py[line:466] 文件保存错误 [Errno 2] No such file or directory: 'D:\\ergou\\EgouBlog\\static\\file_temp\\BtP1ak56l8NmMctpt3Sy3oH4mgBn.jpg\\OgaqzvhIaZCmhr52qKGcgbX24uci.jpg'
+2018-06-12 16:38:37,963 ERROR    127.0.0.1 D:\ergou\EgouBlog\blog\views.py[line:458] 文件上传成功 Huanghei
+2018-06-12 16:38:52,782 ERROR    127.0.0.1 D:\ergou\EgouBlog\blog\views.py[line:458] 文件上传成功 Huanghei
+2018-06-12 17:56:37,990 ERROR    D:\ergou\EgouBlog\blog\dataHelper.py[line:161] 更新数据错误！错误信息:'Site' object has no attribute 'update'
+2018-06-12 17:57:46,578 INFO     D:\ergou\EgouBlog\blog\dataHelper.py[line:167] 更新数据成功
+2018-06-12 17:58:18,156 INFO     D:\ergou\EgouBlog\blog\dataHelper.py[line:167] 更新数据成功

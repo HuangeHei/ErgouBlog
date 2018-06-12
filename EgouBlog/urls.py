@@ -18,6 +18,8 @@ from django.urls import path
 from blog import views as blog
 
 urlpatterns = [
+
+    # get
     path('admin/', admin.site.urls),
     path('get_user_list/', blog.get_user_list),
     path('get_index_setting/', blog.get_index_setting),
@@ -27,4 +29,11 @@ urlpatterns = [
     path('login/', blog.login),
     path('out/', blog.out),
     path('get_login/', blog.get_login_status),
+
+    # set
+
+    path('set_index/', blog.set_index),
+
+    path('upload/', blog.upload_file),
+
 ]

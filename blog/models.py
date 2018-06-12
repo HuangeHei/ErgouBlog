@@ -9,14 +9,6 @@ from django.db import models
 # Create your models here.
 
 
-class Auth(models.Model):
-
-    auth_name = models.CharField(max_length=30,null=False,blank=False)                           # 权限名称
-
-    def __str__(self):
-        return self.auth_name
-
-
 class UserSite(models.Model):
 
     blog_name = models.CharField(max_length=30,null=False,blank=False)                           # 用户博客名称
@@ -40,6 +32,7 @@ class Site(models.Model):
 
 class ArticleClass(models.Model):
 
+    class_name = models.CharField(max_length=200)                             # 类别名称
     class_name = models.CharField(max_length=200)                             # 类别名称
     class_create_time = models.DateTimeField(auto_now_add = True)             # 分类时间
 
@@ -67,11 +60,11 @@ class User(models.Model):
 
     user_name = models.CharField(max_length=1024,null=False,blank=False)      # 用户名
     user_passwd = models.CharField(max_length=1024, null=False, blank=False)  # 用户密码
-    user_head  = models.CharField(max_length=1024,null=False,blank=False)     # 用户 head 头
+    user_head  = models.CharField(max_length=1024,null=False,blank=False)     # 用户头像
     user_article = models.ManyToManyField(Article)                            # 用户文章
     user_article_class = models.ManyToManyField(ArticleClass)                 # 用户文章分类
     user_site = models.ForeignKey(UserSite,on_delete = models.CASCADE)        # 用户主页设置
-    user_auth = models.ForeignKey(Auth,null=True,blank=True,on_delete = models.CASCADE)  # 用户权限
+
 
     def __str__(self):
 

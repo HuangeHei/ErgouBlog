@@ -1,8 +1,11 @@
 from django.shortcuts import render,HttpResponse
 from blog.Auth import Auth
 from blog import dataHelper as db
-import json
 from blog.helper.logHelper import logHelper
+from blog.helper.upLoad import Upload
+from EgouBlog.settings import FILE_TEMP
+import json
+
 log = logHelper('log')
 
 # Create your views here.
@@ -404,12 +407,129 @@ def get_user_site_setting(request):
 
     else:
 
+        log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
+
         return HttpResponse('not get')
 
 #----------------------------------------- 前端展示,无需权限 结束 ---------------------------------------------
 
 #----------------------------------------- 前端后台设置,需要权限 开始 ---------------------------------------------
 
+'''
+    /upload/  post 方式
+    
+    参数  要保存的文件
+
+    返回值 上传成功 和 文件名称
+        {
+            'status':True,
+            'name': 'xxxxxxxxxxxxx'
+        }
+        
+        上传失败
+    
+        {
+            'status':False,
+            'error':'写入失败'
+        }
+'''
+
+@Auth.auth()
+def upload_file(request):
+
+    if request.method == 'POST':
+
+        print(request.FILES['file'])
+        up_obj = Upload(request.FILES['file'],FILE_TEMP) # 创建up_obj 对象
+
+        try:
+
+            file = up_obj.upfile_save()
+
+        except Exception as E:
+
+            log.w('写入失败 原因:%s' % E,'error',log.get_access_ip(request))
+
+            return HttpResponse(json.dumps({
+                'status':False,
+                'error':'写入失败 原因:%s' % E
+            }))
+
+        log.w('文件上传成功 %s' % request.session['user_name'], 'error', log.get_access_ip(request))
+
+        return HttpResponse(json.dumps({
+            'status':True,
+            'name': file
+        }))
+
+    else:
+
+        log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
+
+        return HttpResponse('not get')
+
+
+''' 设置index 页面信息
+
+    /set_index/  post   方式
+
+    参数  
+        {
+            index_setting
+            index_head_color
+            index_notice
+        }
+
+    返回值 上传成功 和 文件名称
+        {
+            'status':True,
+            'name': 'xxxxxxxxxxxxx'
+        }
+
+        上传失败
+
+        {
+            'status':False,
+            'error':'写入失败'
+        }
+'''
+
+
+@Auth.auth()
+def set_index(request):
+
+    if request.method == 'POST':
+
+        data = {
+            'index_setting':request.POST.get('index_setting', None),
+            'index_head_color':request.POST.get('index_head_color', None),
+            'index_notice':request.POST.get('index_notice', None)
+        }
+
+        if data['index_setting'] is not None and data['index_head_color'] is not None and data['index_notice'] is not None:
+            return HttpResponse(json.dumps(db.set_index(data)))
+        else:
+            return HttpResponse('not')
+
+    else:
+
+        log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
+
+        return HttpResponse('not get')
+
+
+@Auth.auth()
+def set_in1dex(request):
+
+    if request.method == 'POST':
+
+        pass
+
+    else:
+
+        log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
+
+        return HttpResponse('not get')
 
 
 #----------------------------------------- 前端后台设置,需要权限 结束 ---------------------------------------------

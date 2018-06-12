@@ -1,8 +1,12 @@
-from blog.models import User,Auth
+from blog.models import User
 from django.shortcuts import render,HttpResponse
 from blog.helper.logHelper import logHelper
+import json
 log_system = logHelper('system')
 log_server = logHelper('log')
+
+
+
 class Auth():
 
     @classmethod
@@ -78,48 +82,38 @@ class Auth():
             }
 
     @classmethod
-    def auth(cls,root):
+    def auth(cls):
 
         def outer_wrapper(func):
+
             def wap(*args, **kwargs):
 
-                try:
+                request = args[0]  # request
 
-                    root_obj = Auth.objects.get(root_name = root)  # 这一步主要怕蠢萌程序员
-
-                except Exception as E:
-
-                    print('程序内部')  # 内部报错信息 以后写入到日志系统中
-                    return HttpResponse('程序内部发生问题')
-
-                if cls.is_login(args[1]):
+                if Auth.login_status(request)['status']:
 
                     try:
 
-                        obj = User.objects.get(user_name=args[1].session['user_name'])
-
-                        try:
-                            is_ok = obj.user_root.filter(root_name=root_obj.root_name)
-
-                        except Exception as e:
-
-                            return HttpResponse('用户权限获取失败')
+                        obj = User.objects.get(user_name = request.session['user_name'])
 
                     except Exception as e:
 
-                        return HttpResponse('not,用户不存在')
+                        log_server.w('用户不存在 进入用户%s' % request.session['user_name'] ,'error',request)
 
-                    if is_ok:
+                        return HttpResponse(json.dumps({
+                            'status':False,
+                            'error':'用户不存在'
+                        }))
 
-                        return func(*args, **kwargs)  # 执行函数
 
-                    else:
-
-                        return HttpResponse('not,无权限')
+                    return func(*args, **kwargs)  # 执行函数
 
                 else:
 
-                    return HttpResponse('not,没有登录')
+                    return HttpResponse(json.dumps({
+                        'status':False,
+                        'error':'用户没有登录'
+                    }))
 
             return wap
 

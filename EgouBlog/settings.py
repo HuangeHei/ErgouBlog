@@ -127,6 +127,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
+# FILE_TEMP
+
+FILE_TEMP = os.path.join(STATICFILES_DIRS[0], "file_temp")
+
 
 # session 关闭即过期
 

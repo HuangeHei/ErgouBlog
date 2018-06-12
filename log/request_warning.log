@@ -17,3 +17,14 @@
 2018-06-11 13:47:19,090 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /get_user_list/ HTTP/1.1" 500 69216
 2018-06-11 13:47:26,848 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /get_user_list/ HTTP/1.1" 500 72829
 2018-06-11 16:38:56,562 WARNING  C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET / HTTP/1.1" 404 2827
+2018-06-12 16:30:10,666 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /upload/ HTTP/1.1" 500 69247
+2018-06-12 16:31:49,882 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /upload/ HTTP/1.1" 500 69240
+2018-06-12 16:32:35,307 WARNING  C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET / HTTP/1.1" 404 2934
+2018-06-12 16:32:38,632 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /upload/ HTTP/1.1" 500 69335
+2018-06-12 16:33:03,611 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /upload/ HTTP/1.1" 500 81407
+2018-06-12 16:35:52,004 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /upload/ HTTP/1.1" 500 77418
+2018-06-12 16:36:57,089 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /upload/ HTTP/1.1" 500 77418
+2018-06-12 16:37:21,431 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /upload/ HTTP/1.1" 500 77418
+2018-06-12 16:47:15,983 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /set_index/ HTTP/1.1" 500 60689
+2018-06-12 16:47:18,395 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /set_index/ HTTP/1.1" 500 60289
+2018-06-12 17:57:56,303 WARNING  C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /favicon.ico HTTP/1.1" 404 3095

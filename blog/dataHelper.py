@@ -1,4 +1,6 @@
 from blog.models import *
+from blog.helper.logHelper import logHelper
+log = logHelper('log')
 import json
 
 '''
@@ -140,3 +142,30 @@ def get_article_class(user_id = False):
 
 
     return json.dumps(ret)
+
+
+def set_index(dic):
+
+    try:
+        site_obj = Site.objects.all()
+    except Exception as E:
+        log.w('获取主页设置数据错误！错误信息:%s' % E,'error')
+        return {
+            'status':False,
+            'error' :'获取主页设置数据错误！错误信息:%s' % E
+        }
+
+    try:
+        site_obj.update(**dic)
+    except Exception as E:
+        log.w('更新数据错误！错误信息:%s' % E, 'error')
+        return {
+            'status': False,
+            'error': '更新数据错误！错误信息:%s' % E
+        }
+
+    log.w('更新数据成功', 'info')
+
+    return {
+        'status': True,
+    }

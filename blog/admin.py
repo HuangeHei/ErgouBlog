@@ -9,5 +9,5 @@ admin.site.register(Site)
 admin.site.register(Article)
 admin.site.register(ArticleClass)
 admin.site.register(User)
-admin.site.register(Auth)
+
 
