@@ -23,3 +23,27 @@
 2018-06-13 01:13:14,830 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:180] 查询用户错误！错误信息:invalid literal for int() with base 10: 'Huanghei'
 2018-06-13 01:13:48,554 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:193] 更新数据错误！错误信息:'QuerySet' object has no attribute 'user_site'
 2018-06-13 01:15:51,872 ERROR    127.0.0.1 D:\ergou\ErgouBlog\blog\views.py[line:567] 信息POST不完整
+2018-06-13 21:19:56,382 ERROR    127.0.0.1 D:\ergou\ErgouBlog\blog\views.py[line:60] 用户名或密码错误
+2018-06-13 21:25:29,574 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:301] 更新数据错误！错误信息:'Manager' object has no attribute 'filer'
+2018-06-13 21:30:11,142 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:301] 更新数据错误！错误信息:'Manager' object has no attribute 'filer'
+2018-06-13 21:32:51,671 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:285] 分类中还有文章无法删除！
+2018-06-13 21:33:17,402 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:301] 更新数据错误！错误信息:ArticleClass matching query does not exist.
+2018-06-13 21:33:25,753 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:301] 更新数据错误！错误信息:ArticleClass matching query does not exist.
+2018-06-13 21:33:32,829 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:301] 更新数据错误！错误信息:ArticleClass matching query does not exist.
+2018-06-13 21:33:37,942 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:285] 分类中还有文章无法删除！
+2018-06-13 21:34:36,499 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:285] 分类中还有文章无法删除！
+2018-06-13 21:35:31,084 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:286] 分类中还有文章无法删除！
+2018-06-13 21:36:14,347 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:286] 分类中还有文章无法删除！
+2018-06-13 21:38:12,596 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:261] 添加失败
+2018-06-13 21:38:44,678 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:261] 添加失败
+2018-06-13 21:39:38,181 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:311] 更新数据错误！错误信息:The QuerySet value for an exact lookup must be limited to one result using slicing.
+2018-06-13 21:44:40,728 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:311] 更新数据错误！错误信息:Cannot resolve keyword 'set_user_name' into field. Choices are: Article, User, class_create_time, class_name, id
+2018-06-13 21:45:10,064 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:311] 更新数据错误！错误信息:The QuerySet value for an exact lookup must be limited to one result using slicing.
+2018-06-13 21:46:29,879 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:261] 添加失败
+2018-06-13 22:23:10,876 ERROR    127.0.0.1 D:\ergou\ErgouBlog\blog\views.py[line:755] 信息POST不完整
+2018-06-13 22:27:46,724 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:423] 更新数据错误！错误信息:local variable 'class_obj' referenced before assignment
+2018-06-13 22:28:13,602 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:346] 无法获取文章分类 错误信息'class_id'
+2018-06-13 22:28:28,625 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:346] 无法获取文章分类 错误信息'class_id'
+2018-06-13 22:33:09,486 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:406] 无法获取文章！
+2018-06-13 22:37:30,568 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:406] 无法获取文章！
+2018-06-13 22:39:50,726 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:406] 无法获取文章！

@@ -35,7 +35,8 @@ urlpatterns = [
     path('set_index/', blog.set_index),
     path('set_user_site/', blog.set_user_site),
     path('set_user/', blog.set_user),
-
+    path('class_manage/', blog.class_manage),
+    path('article_manage/', blog.article_manage),
     path('upload/', blog.upload_file),
 
 ]

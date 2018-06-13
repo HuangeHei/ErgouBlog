@@ -249,18 +249,22 @@ def get_user_list(request):
             {
                 "class_id": 1,
                 "class_name": "HTML 分类"
+                "user":'user_name' // 如果获取所有分类那么 user == 'all'
             },
             {
                 "class_id": 2,
                 "class_name": "CSS 分类"
+                "user":'user_name'
             },
             {
                 "class_id": 3,
                 "class_name": "Python 分类"
+                "user":'user_name'
             },
             {
                 "class_id": 4,
                 "class_name": "Django 分类"
+                "user":'user_name'
             }
         ]
 """
@@ -584,7 +588,7 @@ def set_user_site(request):
 
 ''' 修改用户密码
 
-    /user_passwd/  post  方式
+    /set_user/  post  方式
     
     参数 {
         user_passwd
@@ -635,5 +639,132 @@ def set_user(request):
         return HttpResponse('not get')
 
 
+''' 用户分类的管理器
+
+    增 删 改 
+
+    /class_manage/  post  方式
+
+    参数 {
+        'do':'del/update/add'
+        'user_name':'huanghei'
+        'class_id':'1' //如果是add  则不需要默认写入0 就行
+        'class_name':'2'  
+    }
+
+    返回值 成功
+    {
+        'status':True,
+    }
+
+    失败
+
+    {
+        'status':False,
+        'error':'xxxx'
+    }
+'''
+
+
+@Auth.auth()
+def class_manage(request):
+
+    if request.method == 'POST':
+        try:
+            dic = {
+                'do':request.POST['do'],
+                'user_name': request.session['user_name'],
+                'class_name':request.POST['class_name'],
+                'class_id': request.POST['class_id'],
+            }
+
+        except Exception as E:
+
+            log.w("信息POST不完整", 'error', log.get_access_ip(request))
+
+            return HttpResponse(json.dumps({
+                'status': False,
+                'error': '信息POST不完整'
+            }))
+
+        if dic['user_name'] == request.session['user_name']:
+
+            return HttpResponse(json.dumps(db.class_manage(dic)))
+
+        else:
+
+            log.w("您无法操作:%s,您当前登录的是:%s" % (dic['user_name'],request.session['user_name']), 'error', log.get_access_ip(request))
+
+            return HttpResponse(json.dumps({
+                'status': False,
+                'error': "您无法操作:%s,您当前登录的是:%s" % (dic['user_name'],request.session['user_name'])
+            }))
+
+
+    else:
+
+        log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
+
+        return HttpResponse('not get')
+
+''' 文章的管理器
+
+    增 删 改 
+
+    /article_manage/  post  方式
+
+    参数 {
+        'do':'del/update/add/move'
+        'article_id':'1'        //如果是add  则不需要默认写入0 就行
+        'article_title':'123'  
+        'article_text':'xxx'
+        'article_class_id':'123'
+    }
+
+    返回值 成功
+    {
+        'status':True,
+    }
+
+    失败
+
+    {
+        'status':False,
+        'error':'xxxx'
+    }
+'''
+
+@Auth.auth()
+def article_manage(request):
+
+    if request.method == 'POST':
+
+        try:
+
+            dic = {
+                'do': request.POST['do'],
+                'article_id': request.POST['article_id'],
+                'article_title': request.POST['article_title'],
+                'article_text':request.POST['article_text'],
+                'article_class_id': request.POST['article_class_id'],
+                'user_name':request.session['user_name'],
+            }
+
+        except Exception as E:
+
+            log.w("信息POST不完整", 'error', log.get_access_ip(request))
+
+            return HttpResponse(json.dumps({
+                'status': False,
+                'error': '信息POST不完整'
+            }))
+
+        return HttpResponse(json.dumps(db.article_manage(dic)))
+
+    else:
+
+        log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
+
+        return HttpResponse('not get')
 
 #----------------------------------------- 前端后台设置,需要权限 结束 ---------------------------------------------

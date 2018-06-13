@@ -29,3 +29,9 @@
 2018-06-12 16:47:18,395 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /set_index/ HTTP/1.1" 500 60289
 2018-06-12 17:57:56,303 WARNING  C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /favicon.ico HTTP/1.1" 404 3095
 2018-06-13 01:14:29,577 WARNING  C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /favicon.ico HTTP/1.1" 404 3209
+2018-06-13 21:11:22,334 WARNING  C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /favicon.ico HTTP/1.1" 404 3318
+2018-06-13 21:19:16,569 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /class_manage/ HTTP/1.1" 500 79743
+2018-06-13 21:20:15,363 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /class_manage/ HTTP/1.1" 500 79743
+2018-06-13 22:03:39,201 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /class_manage/ HTTP/1.1" 500 79502
+2018-06-13 22:25:40,792 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /article_manage/ HTTP/1.1" 500 89971
+2018-06-13 22:26:42,783 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /article_manage/ HTTP/1.1" 500 89971
