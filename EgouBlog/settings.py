@@ -26,7 +26,7 @@ SECRET_KEY = '9%%f+swemuc-fq+^!z!#3)2o8or7o4yt!x4ick0o_n0_4_0o+r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['www.awanmo.com']
 
 
 # Application definition
