@@ -35,3 +35,4 @@
 2018-06-13 22:03:39,201 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /class_manage/ HTTP/1.1" 500 79502
 2018-06-13 22:25:40,792 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /article_manage/ HTTP/1.1" 500 89971
 2018-06-13 22:26:42,783 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /article_manage/ HTTP/1.1" 500 89971
+2018-06-14 16:03:56,026 WARNING  C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /favicon.ico HTTP/1.1" 404 3546

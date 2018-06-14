@@ -409,6 +409,41 @@ def article_manage(dic):
                     'status': False,
                     'error': '无法获取文章！'
                 }
+        elif dic['do'] == 'move':
+
+            article_obj = Article.objects.filter(id = dic['article_id'], User__user_name = dic['user_name'])
+
+            if len(article_obj) != 0:
+
+
+                try:
+
+                    article_obj.update(article_class = class_obj)
+
+                except Exception as E:
+
+                    log.w('文章移动分类失败 错误:%s'% E, 'error')
+
+                    return {
+                        'status': False,
+                        'error': '文章移动分类失败'
+                    }
+
+
+                log.w('文章移动分类成功', 'info')
+                return {
+                    'status': True,
+                }
+
+            else:
+
+                log.w('无法获取文章！', 'error')
+
+                return {
+                    'status': False,
+                    'error': '无法获取文章！'
+                }
+
         else:
 
             log.w("请传入正确的do参数", 'error')

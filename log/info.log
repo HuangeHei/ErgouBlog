@@ -72,3 +72,10 @@
 2018-06-13 22:37:30,568 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:406] 无法获取文章！
 2018-06-13 22:39:50,726 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:406] 无法获取文章！
 2018-06-13 22:40:11,688 INFO     D:\ergou\ErgouBlog\blog\dataHelper.py[line:399] 删除成功！
+2018-06-14 16:03:39,392 ERROR    D:\ergou\EgouBlog\blog\dataHelper.py[line:440] 无法获取文章！
+2018-06-14 16:04:29,022 ERROR    D:\ergou\EgouBlog\blog\dataHelper.py[line:425] 文章移动分类失败
+2018-06-14 16:04:46,483 ERROR    D:\ergou\EgouBlog\blog\dataHelper.py[line:425] 文章移动分类失败
+2018-06-14 16:05:15,893 ERROR    D:\ergou\EgouBlog\blog\dataHelper.py[line:425] 文章移动分类失败
+2018-06-14 16:07:02,263 ERROR    D:\ergou\EgouBlog\blog\dataHelper.py[line:425] 文章移动分类失败 错误:Article has no field named 'user_article_class'
+2018-06-14 16:07:37,578 INFO     D:\ergou\EgouBlog\blog\dataHelper.py[line:433] 文章移动分类成功
+2018-06-14 16:07:53,593 INFO     D:\ergou\EgouBlog\blog\dataHelper.py[line:433] 文章移动分类成功
