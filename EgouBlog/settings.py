@@ -38,11 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',  # 添加一句
     'blog'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware', #添加一句这个
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     #'django.middleware.csrf.CsrfViewMiddleware',
@@ -240,5 +242,13 @@ LOGGING = {
         },
     },
 }
+
+
+CORS_ORIGIN_WHITELIST=(
+    'www.awanmo.com',#请求的域名
+)
+
+
+CORS_ALLOW_CREDENTIALS=True
 
 

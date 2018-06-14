@@ -1,60 +1,132 @@
+#----------------------------------------- 用户登录相关 开始 -------------------------------------------------
 
-返回主页设置
+''' 用户登录
 
-/get_index_setting/  get 方式
+    /login/  post 方式
 
-返回值
-    {
-        "index_setting": "随便写",
-        "index_head_color": "#545454",
-        "index_notice": "我是来逗比的公告~"
-    }
-
-
-返回所有用户
-
-/get_user_list/  get 方式
-
-返回值
-    [
-        {
-            "user_id": 1,
-            "user_name": "huanghei"
+    参数 {
+            user_name:'123',
+            user_passwd:'123'
         }
-    ]
 
 
-返回所有分类
-
-/get_user_list/  post 方式
-
-可传参数 user_id
-
-返回值
-    [
+        登录成功
         {
-            "class_id": 1,
-            "class_name": "HTML 分类"
-        },
-        {
-            "class_id": 2,
-            "class_name": "CSS 分类"
-        },
-        {
-            "class_id": 3,
-            "class_name": "Python 分类"
-        },
-        {
-            "class_id": 4,
-            "class_name": "Django 分类"
+            "status": true
         }
-    ]
+        登录失败
+        {
+            "status":false
+            "error":'用户名或密码错误!'
+        }
+        如果账号或密码为空
+        {   
+            'status':false,
+            'error':'用户名密码为空!'
+        }
+'''
 
 
+''' 用户注销
 
-返回指定文章 / 返回用户所有文章
+    /out/  post 方式
 
-/get_article/  post 方式
+        注销成功
+        {
+            "status": true
+        }
+        注销失败
+        {
+            "status":false
+            "error":'error'
+        }
+'''
+
+
+'''获取用户登录属性
+
+    /get_login/  post 方式
+
+        获取成功
+        {
+            "status": true
+            "user_name": 'user_name'
+        }
+        获取失败
+        {
+            "status":false
+        }
+
+'''
+
+#------------------------------------------ 用户登录相关 结束 ------------------------------------------------
+
+
+#----------------------------------------- 前端展示,无需权限 开始 ---------------------------------------------
+
+"""
+    返回主页设置
+    
+    /get_index_setting/  get 方式
+    
+    返回值
+        {
+            "index_setting": "随便写",
+            "index_head_color": "#545454",
+            "index_notice": "我是来逗比的公告~"
+        }
+"""
+
+"""
+    返回所有用户
+
+    /get_user_list/  get 方式
+
+    返回值
+        [
+            {
+                "user_id": 1,
+                "user_name": "huanghei"
+            }
+        ]
+"""
+
+
+"""
+    返回所有分类
+
+    /get_user_list/  post 方式
+    
+    可传参数 user_id
+
+    返回值
+        [
+            {
+                "class_id": 1,
+                "class_name": "HTML 分类"
+                "user":'user_name' // 如果获取所有分类那么 user == 'all'
+            },
+            {
+                "class_id": 2,
+                "class_name": "CSS 分类"
+                "user":'user_name'
+            },
+            {
+                "class_id": 3,
+                "class_name": "Python 分类"
+                "user":'user_name'
+            },
+            {
+                "class_id": 4,
+                "class_name": "Django 分类"
+                "user":'user_name'
+            }
+        ]
+"""
+
+
+'''
+    /get_article/  post 方式
     参数 article_id 或者 user_id
     传递 user_id    返回 用户的所有文章
     传递 article_id 返回 单篇文章
@@ -89,19 +161,168 @@
                 "article_ding": 2
             }
         ]
+'''
 
+'''
+    /get_user_site_setting/  post 方式
+    参数 user_id
 
-返回值用户设置
+    返回值用户设置
+        {
+            "blog_info": "怕是个肥狗子哦！",
+            "blog_bgm": null,
+            "blog_head_color": "#545454",
+            "blog_name": "huanghei"
+        }
+'''
 
-/get_user_site_setting/  post 方式
+#----------------------------------------- 前端展示,无需权限 结束 ---------------------------------------------
 
-参数 user_id
+#----------------------------------------- 前端后台设置,需要权限 开始 ---------------------------------------------
 
+'''
+    /upload/  post 方式
+    
+    参数  要保存的文件
 
+    返回值 上传成功 和 文件名称
+        {
+            'status':True,
+            'name': 'xxxxxxxxxxxxx'
+        }
+        
+        上传失败
+    
+        {
+            'status':False,
+            'error':'写入失败'
+        }
+'''
+
+''' 设置index 页面信息
+
+    /set_index/  post   方式
+
+    参数  
+        {
+            index_setting
+            index_head_color
+            index_notice
+        }
+
+    返回值 成功
+        {
+            'status':True,
+        }
+
+        失败
+
+        {
+            'status':False,
+            'error':'xxxx'
+        }
+'''
+
+''' 设置用户个人站点信息
+
+    /set_user_site/  post   方式
+
+    参数  
+        {
+            blog_name 
+            blog_info 
+            blog_head_color 
+            blog_bgm 
+        }
+
+    返回值 成功
     {
-        "blog_info": "怕是个肥狗子哦！",
-        "blog_bgm": null,
-        "blog_head_color": "#545454",
-        "blog_name": "huanghei"
+        'status':True,
+    }
+    
+    失败
+    
+    {
+        'status':False,
+        'error':'xxxx'
+    }
+'''
+
+''' 修改用户密码
+
+    /set_user/  post  方式
+    
+    参数 {
+        user_passwd
+        或者
+        user_head
     }
 
+    返回值 成功
+    {
+        'status':True,
+    }
+
+    失败
+
+    {
+        'status':False,
+        'error':'xxxx'
+    }
+'''
+
+''' 用户分类的管理器
+
+    增 删 改 
+
+    /class_manage/  post  方式
+
+    参数 {
+        'do':'del/update/add'
+        'user_name':'huanghei'
+        'class_id':'1' //如果是add  则不需要默认写入0 就行
+        'class_name':'2'  
+    }
+
+    返回值 成功
+    {
+        'status':True,
+    }
+
+    失败
+
+    {
+        'status':False,
+        'error':'xxxx'
+    }
+'''
+
+''' 文章的管理器
+
+    增 删 改 文章移动分类
+
+    /article_manage/  post  方式
+
+    参数 {
+        'do':'del/update/add/move'
+        'article_id':'1'           // 如果是add  则不需要默认写入0 就行
+        'article_title':'123'      // 如果是move  则不需要默认写入0 就行
+        'article_text':'xxx'       // 如果是move  则不需要默认写入0 就行
+        'article_class_id':'123'
+    }
+
+    返回值 成功
+    {
+        'status':True,
+    }
+
+    失败
+
+    {
+        'status':False,
+        'error':'xxxx'
+    }
+'''
+
+
+#----------------------------------------- 前端后台设置,需要权限 结束 ---------------------------------------------
