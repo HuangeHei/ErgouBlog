@@ -709,15 +709,15 @@ def class_manage(request):
 
 ''' 文章的管理器
 
-    增 删 改 
+    增 删 改 文章移动分类
 
     /article_manage/  post  方式
 
     参数 {
         'do':'del/update/add/move'
-        'article_id':'1'        //如果是add  则不需要默认写入0 就行
-        'article_title':'123'  
-        'article_text':'xxx'
+        'article_id':'1'           // 如果是add  则不需要默认写入0 就行
+        'article_title':'123'      // 如果是move  则不需要默认写入0 就行
+        'article_text':'xxx'       // 如果是move  则不需要默认写入0 就行
         'article_class_id':'123'
     }
 
