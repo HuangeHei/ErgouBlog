@@ -221,9 +221,6 @@ def get_index_setting(request):
 def get_user_list(request):
 
 
-
-
-
     if request.method == 'GET':
 
         log.w('获取了全部用户列表', 'info', ip=log.get_access_ip(request))
@@ -240,7 +237,7 @@ def get_user_list(request):
 """
     返回所有分类
 
-    /get_user_list/  post 方式
+    /get_article_class/  post 方式
     
     可传参数 user_id
 
@@ -248,24 +245,16 @@ def get_user_list(request):
         [
             {
                 "class_id": 1,
+                "user_name": "Kong",
+                "user_id": 1,
                 "class_name": "HTML 分类"
-                "user":'user_name' // 如果获取所有分类那么 user == 'all'
             },
             {
                 "class_id": 2,
+                "user_name": "Kong",
+                "user_id": 1,
                 "class_name": "CSS 分类"
-                "user":'user_name'
             },
-            {
-                "class_id": 3,
-                "class_name": "Python 分类"
-                "user":'user_name'
-            },
-            {
-                "class_id": 4,
-                "class_name": "Django 分类"
-                "user":'user_name'
-            }
         ]
 """
 
@@ -295,42 +284,55 @@ def get_article_class(request):
 
 
 
-
 '''
     /get_article/  post 方式
-    参数 article_id 或者 user_id
+    参数 article_id 或者 user_id 或者 什么都不传
     传递 user_id    返回 用户的所有文章
     传递 article_id 返回 单篇文章
+    什么都不传 返回所有文章
+    
     返回值(article_id 为参数)
         {
+            "article_modify_date": "2018-06-07 14:02:10",
             "article_id": 1,
-            "article_title": "你好",
-            "article_text": "你好测试一下",
-            "article_date": "2018-06-06 14:02:13",
-            "article_modify_date": "2018-06-06 14:02:13",
+            "article_title": "我是HTML文章标题",
+            "article_is_save": false,
             "article_pageviews": 1,
+            "user_name": "Kong",
+            "user_id": 1,
+            "article_class": "HTML 分类",
+            "article_date": "2018-06-07 14:02:10",
+            "article_text": "我是HTML文章内容",
             "article_ding": 1
         }
     返回值(user_id 为参数)
         [
             {
+                "article_modify_date": "2018-06-07 14:02:10",
                 "article_id": 1,
-                "article_title": "你好",
-                "article_text": "你好测试一下",
-                "article_date": "2018-06-06 14:02:13",
-                "article_modify_date": "2018-06-06 14:02:13",
+                "article_title": "我是HTML文章标题",
+                "article_is_save": false,
                 "article_pageviews": 1,
+                "user_name": "Kong",
+                "user_id": 1,
+                "article_class": "HTML 分类",
+                "article_date": "2018-06-07 14:02:10",
+                "article_text": "我是HTML文章内容",
                 "article_ding": 1
             },
             {
+                "article_modify_date": "2018-06-07 14:02:48",
                 "article_id": 2,
-                "article_title": "你好",
-                "article_text": "测试你好",
-                "article_date": "2018-06-06 14:45:23",
-                "article_modify_date": "2018-06-06 14:45:23",
+                "article_title": "我是CSS文章标题",
+                "article_is_save": false,
                 "article_pageviews": 1,
-                "article_ding": 2
-            }
+                "user_name": "Kong",
+                "user_id": 1,
+                "article_class": "CSS 分类",
+                "article_date": "2018-06-07 14:02:48",
+                "article_text": "我是CSS文章内容",
+                "article_ding": 1
+            },
         ]
 '''
 
@@ -346,7 +348,8 @@ def get_article(request):
 
             return HttpResponse(db.get_article(user_id = user_id))
 
-        else:
+        elif request.POST.get('article_id',False):
+
 
             try:
 
@@ -365,6 +368,26 @@ def get_article(request):
                     'error':'获取单个文章出错，详细见日志'
                 }))
 
+        else:
+
+            try:
+
+                log.w(('获取文章获取全部文章'), 'info', log.get_access_ip(request))
+
+                return HttpResponse(db.get_article())
+
+            except Exception as E:
+
+                log.w(("获取全部文章错误 错误信息:%s" % E),'error', log.get_access_ip(request))
+
+                return HttpResponse(json.dumps({
+                    'status':False,
+                    'error':'获取全部文章错误，错误信息:%s' % E
+                }))
+
+
+
+
     else:
 
         log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
@@ -375,6 +398,7 @@ def get_article(request):
 
 '''
     /get_user_site_setting/  post 方式
+    
     参数 user_id
 
     返回值用户设置
@@ -536,7 +560,7 @@ def set_index(request):
     参数  
         {
             blog_name 
-            blog_info 
+            blog_info           // 没有参数就传 0
             blog_head_color 
             blog_bgm 
         }

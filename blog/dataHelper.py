@@ -56,11 +56,12 @@ def get_article(article_id = False,user_id = False):
 
     ret = []
 
-    if not user_id :
+    if article_id :
 
         article_list = Article.objects.filter(id = article_id)
 
-    else:
+    elif user_id:
+
         try:
 
             user_obj = User.objects.get(id = user_id)
@@ -71,8 +72,22 @@ def get_article(article_id = False,user_id = False):
             return json.dumps({
                 'error':'您提供的用户有误，或者无此文章'
             })
+    else:
+
+        try:
+
+            article_list = Article.objects.all()
+
+        except Exception as E:
+
+            return json.dumps({
+                'error':'无法获取所有文章'
+            })
+
 
     for item in article_list:
+
+        user = item.User.all()[0]
 
         ret.append(
             {
@@ -84,6 +99,9 @@ def get_article(article_id = False,user_id = False):
                 "article_pageviews": item.article_pageviews,
                 "article_ding":item.article_ding,
                 "article_class":item.article_class.class_name,
+                "article_id": item.article_class.id,
+                "user_name":user.user_name,
+                "user_id":user.id,
                 "article_is_save": item.article_is_save,
             }
         )
@@ -92,8 +110,11 @@ def get_article(article_id = False,user_id = False):
 
     if user_id:
         return json.dumps(ret)
-    else:
+    elif article_id:
         return json.dumps(ret[0])
+    else:
+        return json.dumps(ret)
+
 
 
 def get_user_setting(user_id):
@@ -130,18 +151,20 @@ def get_article_class(user_id = False):
         article_class = user_obj.user_article_class.all()
 
     else:
-        user_obj = {'user_name':'all'}
+
         article_class = ArticleClass.objects.all()
 
     ret = []
 
+
     for item in article_class:
+        user = item.User.all()[0]
         ret.append({
             'class_id':item.id,
             'class_name':item.class_name,
-            'user':user_obj.user_name
+            'user_id': user.id,
+            'user_name':user.user_name,
         })
-
 
     return json.dumps(ret)
 
