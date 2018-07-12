@@ -3,6 +3,7 @@ from blog.Auth import Auth
 from blog import dataHelper as db
 from blog.helper.logHelper import logHelper
 from blog.helper.upLoad import Upload
+from blog.helper.test_do import Test
 from EgouBlog.settings import FILE_TEMP
 import json
 
@@ -21,10 +22,11 @@ log = logHelper('log')
             user_passwd:'123'
         }
 
-
         登录成功
         {
-            "status": true
+            "status": true          # 返回登录状态
+            "user_name":"huanghei"  # 返回登录的用户名
+            "user_id":"123"         # 返回用户id
         }
         登录失败
         {
@@ -53,6 +55,8 @@ def login(request):
 
                 return HttpResponse(json.dumps({
                     'status': True,
+                    'user_id':request.session['user_id'],
+                    'user_name':request.session['user_name']
                 }))
 
             else:
@@ -127,12 +131,13 @@ def out(request):
 
 '''获取用户登录属性
 
-    /get_login/  post 方式
+    /get_login/  get 方式
 
         获取成功
         {
             "status": true
             "user_name": 'user_name'
+            "user_id":'123'
         }
         获取失败
         {
@@ -143,6 +148,7 @@ def out(request):
 
 
 def get_login_status(request):
+
     if request.method == 'GET':
 
         ret = Auth.login_status(request)
@@ -239,23 +245,30 @@ def get_user_list(request):
 
     /get_article_class/  post 方式
     
-    可传参数 user_id
+    可传参数 user_id  不传参数  返回所有用户分类
 
     返回值
         [
             {
-                "class_id": 1,
-                "user_name": "Kong",
                 "user_id": 1,
-                "class_name": "HTML 分类"
+                "class_id": 1,
+                "class_name": "HTML 分类",
+                "user_name": "Kong"
             },
             {
-                "class_id": 2,
-                "user_name": "Kong",
                 "user_id": 1,
-                "class_name": "CSS 分类"
+                "class_id": 2,
+                "class_name": "CSS 分类",
+                "user_name": "Kong"
             },
+            {
+                "user_id": 1,
+                "class_id": 13,
+                "class_name": "SB 分类",
+                "user_name": "Kong"
+            }
         ]
+    
 """
 
 
@@ -289,9 +302,10 @@ def get_article_class(request):
     参数 article_id 或者 user_id 或者 什么都不传
     传递 user_id    返回 用户的所有文章
     传递 article_id 返回 单篇文章
-    什么都不传 返回所有文章
+    什么都不传       返回 所有文章
     
-    返回值(article_id 为参数)
+    返回值
+    [
         {
             "article_modify_date": "2018-06-07 14:02:10",
             "article_id": 1,
@@ -304,36 +318,23 @@ def get_article_class(request):
             "article_date": "2018-06-07 14:02:10",
             "article_text": "我是HTML文章内容",
             "article_ding": 1
-        }
-    返回值(user_id 为参数)
-        [
-            {
-                "article_modify_date": "2018-06-07 14:02:10",
-                "article_id": 1,
-                "article_title": "我是HTML文章标题",
-                "article_is_save": false,
-                "article_pageviews": 1,
-                "user_name": "Kong",
-                "user_id": 1,
-                "article_class": "HTML 分类",
-                "article_date": "2018-06-07 14:02:10",
-                "article_text": "我是HTML文章内容",
-                "article_ding": 1
-            },
-            {
-                "article_modify_date": "2018-06-07 14:02:48",
-                "article_id": 2,
-                "article_title": "我是CSS文章标题",
-                "article_is_save": false,
-                "article_pageviews": 1,
-                "user_name": "Kong",
-                "user_id": 1,
-                "article_class": "CSS 分类",
-                "article_date": "2018-06-07 14:02:48",
-                "article_text": "我是CSS文章内容",
-                "article_ding": 1
-            },
-        ]
+        },
+        {
+            "article_modify_date": "2018-06-07 14:02:48",
+            "article_id": 2,
+            "article_title": "我是CSS文章标题",
+            "article_is_save": false,
+            "article_pageviews": 1,
+            "user_name": "Kong",
+            "user_id": 1,
+            "article_class": "CSS 分类",
+            "article_date": "2018-06-07 14:02:48",
+            "article_text": "我是CSS文章内容",
+            "article_ding": 1
+        },
+    ]
+
+ 
 '''
 
 def get_article(request):
@@ -403,10 +404,10 @@ def get_article(request):
 
     返回值用户设置
         {
-            "blog_info": "怕是个肥狗子哦！",
+            "blog_name": "Kong",
             "blog_bgm": null,
             "blog_head_color": "#545454",
-            "blog_name": "huanghei"
+            "blog_info": "怕是个肥狗子哦！"
         }
 '''
 
@@ -446,7 +447,10 @@ def get_user_site_setting(request):
 '''
     /upload/  post 方式
     
-    参数  要保存的文件
+    参数 ajax方式的话  {
+        'file':file
+    }要保存的文件,插件上传图片，或者表单上传图片则不需要key
+    
 
     返回值 上传成功 和 文件名称
         {
@@ -455,7 +459,6 @@ def get_user_site_setting(request):
         }
         
         上传失败
-    
         {
             'status':False,
             'error':'写入失败'
@@ -467,7 +470,6 @@ def upload_file(request):
 
     if request.method == 'POST':
 
-        print(request.FILES['file'])
         up_obj = Upload(request.FILES['file'],FILE_TEMP) # 创建up_obj 对象
 
         try:
@@ -615,9 +617,9 @@ def set_user_site(request):
     /set_user/  post  方式
     
     参数 {
-        user_passwd
+        user_passwd  # 修改user_passwd
         或者
-        user_head
+        user_head    # 或者修改user_head
     }
 
     返回值 成功
@@ -641,11 +643,11 @@ def set_user(request):
 
             if request.POST.get('user_passwd',None) is not None:
 
-                return HttpResponse(json.dumps(db.update_user(request.session['user_name'], user_passwd=request.POST['user_passwd'])))
+                return HttpResponse(json.dumps(db.update_user(request.session['user_id'], user_passwd=request.POST['user_passwd'])))
 
             elif request.POST.get('user_head',None) is not None:
 
-                return HttpResponse(json.dumps(db.update_user(request.session['user_name'], user_head=request.POST['user_head'])))
+                return HttpResponse(json.dumps(db.update_user(request.session['user_id'], user_head=request.POST['user_head'])))
 
             else:
 
@@ -671,9 +673,8 @@ def set_user(request):
 
     参数 {
         'do':'del/update/add'
-        'user_name':'huanghei'
-        'class_id':'1' //如果是add  则不需要默认写入0 就行
-        'class_name':'2'  
+        'class_id':'1' //如果是add  不需要传入     update时需要传入 按照class_id 来更改class_name，class_id 本身不可以改变
+        'class_name':'2'  //如果是del  不需要传入  update时需要传入
     }
 
     返回值 成功
@@ -694,42 +695,28 @@ def set_user(request):
 def class_manage(request):
 
     if request.method == 'POST':
-        try:
-            dic = {
-                'do':request.POST['do'],
-                'user_name': request.session['user_name'],
-                'class_name':request.POST['class_name'],
-                'class_id': request.POST['class_id'],
-            }
 
-        except Exception as E:
+        t = Test(request,{'del':['class_id'],
+                          'add':['class_name'],
+                          'update':['class_name','class_id']}
+                 )
 
-            log.w("信息POST不完整", 'error', log.get_access_ip(request))
+        if t['status'] == True:
 
-            return HttpResponse(json.dumps({
-                'status': False,
-                'error': '信息POST不完整'
-            }))
-
-        if dic['user_name'] == request.session['user_name']:
-
-            return HttpResponse(json.dumps(db.class_manage(dic)))
+            dic = t['dic']
 
         else:
 
-            log.w("您无法操作:%s,您当前登录的是:%s" % (dic['user_name'],request.session['user_name']), 'error', log.get_access_ip(request))
+            return  HttpResponse(json.dumps(t))
 
-            return HttpResponse(json.dumps({
-                'status': False,
-                'error': "您无法操作:%s,您当前登录的是:%s" % (dic['user_name'],request.session['user_name'])
-            }))
-
+        return HttpResponse(json.dumps(db.class_manage(dic)))
 
     else:
 
         log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
 
         return HttpResponse('not get')
+
 
 ''' 文章的管理器
 
@@ -738,11 +725,11 @@ def class_manage(request):
     /article_manage/  post  方式
 
     参数 {
-        'do':'del/update/add/move'
-        'article_id':'1'           // 如果是add  则不需要默认写入0 就行
-        'article_title':'123'      // 如果是move  则不需要默认写入0 就行
-        'article_text':'xxx'       // 如果是move  则不需要默认写入0 就行
-        'article_class_id':'123'
+        'do':'del/update/add/move' // 如果是del    只需要 article_id
+        'article_id':'1'           // 如果是add    不需要此参数
+        'article_title':'123'      // 如果是move   不需要此参数
+        'article_text':'xxx'       // 如果是move   不需要此参数
+        'article_class_id':'123'   
     }
 
     返回值 成功
@@ -763,25 +750,22 @@ def article_manage(request):
 
     if request.method == 'POST':
 
-        try:
+        t = Test(request, {
+                    'add':['article_title','article_text','article_class_id'],
+                    'update':['article_id','article_title','article_text','article_class_id'],
+                    'move':['article_id','article_class_id'],
+                    'del':['article_id']}
+                 )
 
-            dic = {
-                'do': request.POST['do'],
-                'article_id': request.POST['article_id'],
-                'article_title': request.POST['article_title'],
-                'article_text':request.POST['article_text'],
-                'article_class_id': request.POST['article_class_id'],
-                'user_name':request.session['user_name'],
-            }
 
-        except Exception as E:
+        if t['status'] == True:
 
-            log.w("信息POST不完整", 'error', log.get_access_ip(request))
+            dic = t['dic']
 
-            return HttpResponse(json.dumps({
-                'status': False,
-                'error': '信息POST不完整'
-            }))
+        else:
+
+            return HttpResponse(json.dumps(t))
+
 
         return HttpResponse(json.dumps(db.article_manage(dic)))
 

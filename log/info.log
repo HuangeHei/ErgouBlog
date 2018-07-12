@@ -79,3 +79,140 @@
 2018-06-14 16:07:02,263 ERROR    D:\ergou\EgouBlog\blog\dataHelper.py[line:425] 文章移动分类失败 错误:Article has no field named 'user_article_class'
 2018-06-14 16:07:37,578 INFO     D:\ergou\EgouBlog\blog\dataHelper.py[line:433] 文章移动分类成功
 2018-06-14 16:07:53,593 INFO     D:\ergou\EgouBlog\blog\dataHelper.py[line:433] 文章移动分类成功
+2018-07-12 16:23:50,832 INFO     127.0.0.1 D:\PythonSource\ErgouBlog\blog\views.py[line:373] 获取文章获取全部文章
+2018-07-12 16:23:54,730 INFO     127.0.0.1 D:\PythonSource\ErgouBlog\blog\views.py[line:420] 获取用户设置 USER_ID:1
+2018-07-12 16:25:27,878 ERROR    127.0.0.1 D:\PythonSource\ErgouBlog\blog\views.py[line:703] 信息POST不完整
+2018-07-12 16:31:38,601 ERROR    127.0.0.1 D:\PythonSource\ErgouBlog\blog\views.py[line:703] 信息POST不完整
+2018-07-12 16:33:32,720 INFO     127.0.0.1 D:\PythonSource\ErgouBlog\blog\views.py[line:53] 用户登录成功 USER_NAME:Huanghei
+2018-07-12 16:37:46,904 INFO     127.0.0.1 D:\PythonSource\ErgouBlog\blog\views.py[line:53] 用户登录成功 USER_NAME:Huanghei
+2018-07-12 16:37:58,711 INFO     127.0.0.1 D:\PythonSource\ErgouBlog\blog\views.py[line:53] 用户登录成功 USER_NAME:Huanghei
+2018-07-12 16:38:05,604 ERROR    127.0.0.1 D:\PythonSource\ErgouBlog\blog\views.py[line:716] 您无法操作:2,您当前登录的是:Huanghei
+2018-07-12 16:38:14,940 ERROR    127.0.0.1 D:\PythonSource\ErgouBlog\blog\views.py[line:716] 您无法操作:2,您当前登录的是:Huanghei
+2018-07-12 21:02:34,409 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:703] 信息POST不完整
+2018-07-12 21:04:12,887 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:70] 用户名密码为空
+2018-07-12 21:06:43,066 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:53] 用户登录成功 USER_NAME:Huanghei
+2018-07-12 21:07:47,289 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:703] 信息POST不完整
+2018-07-12 21:10:37,656 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:703] 信息POST不完整
+2018-07-12 21:48:17,054 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:307] 更新成功
+2018-07-12 21:49:05,595 ERROR    D:\source\ErgouBlog\blog\dataHelper.py[line:314] 更新失败
+2018-07-12 21:52:21,618 ERROR    D:\source\ErgouBlog\blog\dataHelper.py[line:314] 更新失败
+2018-07-12 21:52:27,845 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:307] 更新成功
+2018-07-12 22:04:08,641 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:307] 更新成功
+2018-07-12 22:04:11,999 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:307] 更新成功
+2018-07-12 22:47:19,227 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:760] do 错误
+2018-07-12 22:47:35,729 ERROR    D:\source\ErgouBlog\blog\dataHelper.py[line:394] 无法获取文章分类 错误信息'article_class_id'
+2018-07-12 22:51:28,849 ERROR    D:\source\ErgouBlog\blog\dataHelper.py[line:498] 更新数据错误！错误信息:'article_id'
+2018-07-12 22:53:00,252 ERROR    D:\source\ErgouBlog\blog\dataHelper.py[line:498] 更新数据错误！错误信息:'article_id'
+2018-07-12 22:53:55,411 ERROR    D:\source\ErgouBlog\blog\dataHelper.py[line:498] 更新数据错误！错误信息:'article_id'
+2018-07-12 22:54:03,183 ERROR    D:\source\ErgouBlog\blog\dataHelper.py[line:498] 更新数据错误！错误信息:'article_id'
+2018-07-12 22:54:25,755 ERROR    D:\source\ErgouBlog\blog\dataHelper.py[line:498] 更新数据错误！错误信息:'article_id'
+2018-07-12 22:54:40,747 ERROR    D:\source\ErgouBlog\blog\dataHelper.py[line:498] 更新数据错误！错误信息:'article_id'
+2018-07-12 22:55:41,671 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:496] 更新数据成功
+2018-07-12 23:04:34,081 ERROR    D:\source\ErgouBlog\blog\dataHelper.py[line:393] 无法获取文章分类 错误信息ArticleClass matching query does not exist.
+2018-07-12 23:04:57,674 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:433] 更新成功
+2018-07-12 23:05:19,290 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:433] 更新成功
+2018-07-12 23:05:34,426 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:433] 更新成功
+2018-07-12 23:09:47,516 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:433] 更新成功
+2018-07-12 23:09:49,877 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:433] 更新成功
+2018-07-12 23:10:12,936 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:446] 删除成功！
+2018-07-12 23:10:36,543 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:408] 添加文章成功
+2018-07-12 23:10:42,662 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:803] POST信息不完整
+2018-07-12 23:10:47,274 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:408] 添加文章成功
+2018-07-12 23:11:09,960 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:803] POST信息不完整
+2018-07-12 23:11:19,118 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:446] 删除成功！
+2018-07-12 23:11:42,168 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:468] 文章移动分类成功
+2018-07-12 23:11:54,050 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:468] 文章移动分类成功
+2018-07-12 23:28:37,177 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:468] 文章移动分类成功
+2018-07-12 23:28:41,164 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:468] 文章移动分类成功
+2018-07-12 23:28:56,003 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:433] 更新成功
+2018-07-12 23:29:00,633 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:433] 更新成功
+2018-07-12 23:29:05,064 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:433] 更新成功
+2018-07-12 23:49:08,155 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\helper\test_do.py[line:13] do 错误
+2018-07-12 23:50:35,902 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\helper\test_do.py[line:14] do 错误
+2018-07-12 23:50:52,549 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\helper\test_do.py[line:14] do 错误
+2018-07-12 23:51:04,932 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\helper\test_do.py[line:14] do 错误
+2018-07-12 23:51:55,294 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\helper\test_do.py[line:37] POST信息不完整
+2018-07-12 23:52:44,562 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\helper\test_do.py[line:37] POST信息不完整
+2018-07-12 23:53:07,274 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\helper\test_do.py[line:38] POST信息不完整
+2018-07-12 23:53:22,194 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\helper\test_do.py[line:38] POST信息不完整
+2018-07-12 23:53:35,022 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:433] 更新成功
+2018-07-12 23:53:40,269 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:433] 更新成功
+2018-07-12 23:53:57,595 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\helper\test_do.py[line:14] do 错误
+2018-07-12 23:54:03,760 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\helper\test_do.py[line:38] POST信息不完整
+2018-07-12 23:58:53,083 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:304] 更新成功
+2018-07-12 23:59:01,336 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:304] 更新成功
+2018-07-12 23:59:09,848 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:328] 删除成功！
+2018-07-12 23:59:26,410 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:284] 添加成功
+2018-07-13 00:02:03,841 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:257] 更新数据成功
+2018-07-13 00:02:17,714 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:284] 添加成功
+2018-07-13 00:06:27,923 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:374] 获取文章获取全部文章
+2018-07-13 00:06:49,497 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:374] 获取文章获取全部文章
+2018-07-13 00:07:00,181 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:346] 获取用户所有文章 USER_ID:1
+2018-07-13 00:07:08,137 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:346] 获取用户所有文章 USER_ID:2
+2018-07-13 00:10:30,786 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:346] 获取用户所有文章 USER_ID:2
+2018-07-13 00:11:45,232 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:346] 获取用户所有文章 USER_ID:2
+2018-07-13 00:12:21,834 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:346] 获取用户所有文章 USER_ID:2
+2018-07-13 00:12:29,518 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:346] 获取用户所有文章 USER_ID:2
+2018-07-13 00:13:14,547 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:357] 获取文章 ARTICLE_ID:4
+2018-07-13 00:13:24,105 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:357] 获取文章 ARTICLE_ID:5
+2018-07-13 00:13:24,107 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:363] 获取单个文章出错 错误信息:list index out of range
+2018-07-13 00:15:21,330 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:287] 获取所有用户文章分类
+2018-07-13 00:16:02,706 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:281] 获取用户文章分类USER_ID:1
+2018-07-13 00:16:10,555 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:281] 获取用户文章分类USER_ID:2
+2018-07-13 00:18:10,827 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:116] 用户注销失败 错误信息:并没有登录!
+2018-07-13 00:18:23,940 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:62] 用户名或密码错误
+2018-07-13 00:18:28,322 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:62] 用户名或密码错误
+2018-07-13 00:18:41,067 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:62] 用户名或密码错误
+2018-07-13 00:18:52,240 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:20:01,117 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:20:48,136 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:20:53,087 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:21:23,512 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:158] 获取用户登录状态成功
+2018-07-13 00:22:17,420 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:22:58,675 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:23:35,152 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:23:52,401 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:118] 用户注销失败 错误信息:并没有登录!
+2018-07-13 00:24:02,408 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:27:04,454 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:27:05,313 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:27:21,565 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:28:38,580 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:118] 用户注销失败 错误信息:并没有登录!
+2018-07-13 00:28:42,302 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:29:12,140 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:118] 用户注销失败 错误信息:并没有登录!
+2018-07-13 00:29:14,127 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:31:08,159 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:31:42,174 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:110] 用户注销成功
+2018-07-13 00:31:51,035 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:31:52,887 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:110] 用户注销成功
+2018-07-13 00:32:05,541 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:164] 获取用户登录状态失败
+2018-07-13 00:32:11,890 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:118] 用户注销失败 错误信息:并没有登录!
+2018-07-13 00:32:17,373 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:32:20,328 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:110] 用户注销成功
+2018-07-13 00:33:46,163 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:33:47,422 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:110] 用户注销成功
+2018-07-13 00:33:56,259 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:34:04,768 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:34:09,661 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:110] 用户注销成功
+2018-07-13 00:34:15,065 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:34:41,340 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:118] 用户注销失败 错误信息:并没有登录!
+2018-07-13 00:34:44,484 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:34:46,928 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:110] 用户注销成功
+2018-07-13 00:34:59,850 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:35:11,649 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:110] 用户注销成功
+2018-07-13 00:35:50,398 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:35:52,383 ERROR    D:\source\ErgouBlog\blog\dataHelper.py[line:289] 添加失败
+2018-07-13 00:36:08,828 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:36:12,766 ERROR    D:\source\ErgouBlog\blog\dataHelper.py[line:289] 添加失败
+2018-07-13 00:36:20,731 INFO     D:\source\ErgouBlog\blog\dataHelper.py[line:284] 添加成功
+2018-07-13 00:36:31,821 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:110] 用户注销成功
+2018-07-13 00:36:35,293 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:36:38,507 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:36:42,626 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:110] 用户注销成功
+2018-07-13 00:36:53,847 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:40:28,142 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:232] 获取了全部用户列表
+2018-07-13 00:41:02,071 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:294] 错误的访问，无 GET
+2018-07-13 00:41:26,246 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:289] 获取所有用户文章分类
+2018-07-13 00:43:52,447 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:478] 写入失败 原因:[Errno 2] No such file or directory: 'D:\\source\\ErgouBlog\\static\\file_temp\\gHd5unusvW80UrsXxvK3qwGYdbEC.jpg'
+2018-07-13 00:44:28,635 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:485] 文件上传成功 Huanghei
+2018-07-13 00:48:32,176 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
+2018-07-13 00:48:39,090 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:110] 用户注销成功

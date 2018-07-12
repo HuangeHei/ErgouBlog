@@ -89,6 +89,7 @@ def get_article(article_id = False,user_id = False):
 
         user = item.User.all()[0]
 
+
         ret.append(
             {
                 "article_id":item.id,
@@ -99,7 +100,7 @@ def get_article(article_id = False,user_id = False):
                 "article_pageviews": item.article_pageviews,
                 "article_ding":item.article_ding,
                 "article_class":item.article_class.class_name,
-                "article_id": item.article_class.id,
+                "article_class_id": item.article_class.id,
                 "user_name":user.user_name,
                 "user_id":user.id,
                 "article_is_save": item.article_is_save,
@@ -114,6 +115,9 @@ def get_article(article_id = False,user_id = False):
         return json.dumps(ret[0])
     else:
         return json.dumps(ret)
+
+
+
 
 
 
@@ -132,7 +136,6 @@ def get_user_setting(user_id):
         'blog_info': site_obj.blog_info,
         'blog_head_color': site_obj.blog_head_color,
         'blog_bgm': site_obj.blog_bgm,
-
     })
 
 
@@ -228,9 +231,9 @@ def set_user_site(user,dic):
     }
 
 
-def update_user(user_name,user_passwd = None,user_head = None):
+def update_user(user_id,user_passwd = None,user_head = None):
 
-    obj = User.objects.filter(user_name=user_name)
+    obj = User.objects.filter(id = user_id)
 
     if obj:
 
@@ -259,7 +262,7 @@ def update_user(user_name,user_passwd = None,user_head = None):
 
     else:
 
-        log.w('更新数据错误！找不到用户' 'error')
+        log.w('更新数据错误！找不到用户','error')
 
         return json.dumps({
             'status':False,
@@ -269,74 +272,78 @@ def update_user(user_name,user_passwd = None,user_head = None):
 
 def class_manage(dic):
 
-    user_obj = User.objects.filter(user_name = dic['user_name'])
+    user_obj = User.objects.filter(id = dic['user_id']) # 找到当前用户
 
-    try:
-        if dic['do'] == 'add':
+    if dic['do'] == 'add':
 
-            if len(ArticleClass.objects.filter(class_name = dic['class_name'],User__user_name = dic['user_name'])) == 0:
-                class_obj = ArticleClass.objects.create(class_name = dic['class_name'])
-                user_obj[0].user_article_class.add(class_obj)
+        if len(ArticleClass.objects.filter(class_name = dic['class_name'],User__id = dic['user_id'])) == 0:
 
-                log.w('添加成功', 'info')
-                return {
-                    'status': True,
-                }
-            else:
-                log.w('添加失败', 'error')
-                return {
-                    'status': False,
-                    'error':'分类命名重复'
-                }
+            class_obj = ArticleClass.objects.create(class_name = dic['class_name']) # 创建class
+            user_obj[0].user_article_class.add(class_obj)
+
+            log.w('添加成功', 'info')
+            return {
+                'status': True,
+            }
+        else:
+            log.w('添加失败', 'error')
+            return {
+                'status': False,
+                'error':'分类命名重复'
+            }
+
+    elif dic['do'] == 'update':
 
 
+        class_ret = ArticleClass.objects.filter(id = dic['class_id'],User__id = dic['user_id'])
 
-        elif dic['do'] == 'update':
+        if len(class_ret):
 
-            ArticleClass.objects.filter(id = dic['class_id']).update(class_name = dic['class_name'])
+            class_ret.update(class_name = dic['class_name'])
 
             log.w('更新成功', 'info')
             return {
                 'status': True,
             }
 
-        elif dic['do'] == 'del':
-
-            class_obj = ArticleClass.objects.get(id = dic['class_id'])
-
-            article = Article.objects.filter(article_class = class_obj)
-
-            if len(article) == 0:
-
-                class_obj.delete()
-
-                log.w('删除成功！', 'info')
-                return {
-                    'status': True,
-                }
-
-            else:
-
-                log.w('分类中还有文章无法删除！','error')
-                return {
-                    'status': False,
-                    'error': '分类中还有文章无法删除！'
-                }
         else:
 
-            log.w("请传入正确的do参数", 'error')
-
+            log.w('更新失败', 'error')
             return {
                 'status': False,
-                'error': '请传入正确的do参数'
+                'error':'当前登录的用户与分类所属用户不符合'
             }
 
-    except Exception as E:
 
-        log.w('更新数据错误！错误信息:%s' % E, 'error')
+    elif dic['do'] == 'del':
+
+        class_obj = ArticleClass.objects.get(id = dic['class_id'])
+
+        article = Article.objects.filter(article_class = class_obj)
+
+        if len(article) == 0:
+
+            class_obj.delete()
+
+            log.w('删除成功！', 'info')
+            return {
+                'status': True,
+            }
+
+        else:
+
+            log.w('分类中还有文章无法删除！','error')
+            return {
+                'status': False,
+                'error': '分类中还有文章无法删除！'
+            }
+    else:
+
+        log.w("请传入正确的do参数", 'error')
+
         return {
             'status': False,
-            'error': '更新数据错误！错误信息:%s' % E
+            'error': '请传入正确的do参数'
         }
 
     log.w('更新数据成功', 'info')
@@ -344,6 +351,18 @@ def class_manage(dic):
     return {
         'status': True,
     }
+'''
+    try:
+    except Exception as E:
+        print(E)
+
+        log.w('更新数据错误！错误信息:%s' % E, 'error')
+        return {
+            'status': False,
+            'error': '更新数据错误！错误信息:%s' % E
+        }'''
+
+
 
 '''
     else:
@@ -358,19 +377,21 @@ def class_manage(dic):
 
 def article_manage(dic):
 
-    user_obj = User.objects.filter(user_name = dic['user_name'])
+    user_obj = User.objects.filter(id = dic['user_id'])
 
-    try:
+    if dic['do'] not in ['del']:
 
-        class_obj = ArticleClass.objects.get(id=dic['article_class_id'],User__user_name = dic['user_name'])
+        try:
 
-    except Exception as E:
+            class_obj = ArticleClass.objects.get(id=dic['article_class_id'], User__id=dic['user_id'])
 
-        log.w('无法获取文章分类 错误信息%s' % E, 'error')
-        return {
-            'status': False,
-            'error': '无法获取文章分类 错误信息%s' % E
-        }
+        except Exception as E:
+
+            log.w('无法获取文章分类 错误信息%s' % E, 'error')
+            return {
+                'status': False,
+                'error': '无法获取文章分类 错误信息%s,如果你是update那么可能是目标分类不属于你' % E
+            }
 
     try:
         if dic['do'] == 'add':
@@ -388,7 +409,7 @@ def article_manage(dic):
 
         elif dic['do'] == 'update':
 
-            article_obj = Article.objects.filter(id = dic['article_id'],User__user_name = dic['user_name'])
+            article_obj = Article.objects.filter(id = dic['article_id'],User__id = dic['user_id'])
 
             if len(article_obj) == 0:
 
@@ -413,7 +434,7 @@ def article_manage(dic):
 
         elif dic['do'] == 'del':
 
-            article_obj = Article.objects.filter(id = dic['article_id'], User__user_name = dic['user_name'])
+            article_obj = Article.objects.filter(id = dic['article_id'],User__id = dic['user_id'])
 
             if len(article_obj) != 0:
 
@@ -432,26 +453,14 @@ def article_manage(dic):
                     'status': False,
                     'error': '无法获取文章！'
                 }
+
         elif dic['do'] == 'move':
 
-            article_obj = Article.objects.filter(id = dic['article_id'], User__user_name = dic['user_name'])
+            article_obj = Article.objects.filter(id = dic['article_id'], User__id = dic['user_id'])
 
             if len(article_obj) != 0:
 
-
-                try:
-
-                    article_obj.update(article_class = class_obj)
-
-                except Exception as E:
-
-                    log.w('文章移动分类失败 错误:%s'% E, 'error')
-
-                    return {
-                        'status': False,
-                        'error': '文章移动分类失败'
-                    }
-
+                article_obj.update(article_class = class_obj)
 
                 log.w('文章移动分类成功', 'info')
                 return {
@@ -466,28 +475,11 @@ def article_manage(dic):
                     'status': False,
                     'error': '无法获取文章！'
                 }
-
-        else:
-
-            log.w("请传入正确的do参数", 'error')
-
-            return {
-                'status': False,
-                'error': '请传入正确的do参数'
-            }
-
     except Exception as E:
 
-        log.w('更新数据错误！错误信息:%s' % E, 'error')
+        log.w('更新错误 错误信息:%s' % E, 'error')
+
         return {
             'status': False,
-            'error': '更新数据错误！错误信息:%s' % E
+            'error': '更新错误 错误信息:%s' % E
         }
-
-    log.w('更新数据成功', 'info')
-
-    return {
-        'status': True,
-    }
-
-

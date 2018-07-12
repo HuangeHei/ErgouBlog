@@ -12,17 +12,14 @@ class Auth():
     @classmethod
     def login_status(cls,req):
 
-        if  req.session.get('user_name',False) and (req.session.get('status',False) == True):
+        if  req.session.get('user_id',False) and (req.session.get('status',False) == True):
             return {
                 'status':True,
-                'user_name':req.session['user_name']
-            }
-        elif req.session.get('user_name',False):
-            req.session.delete()
-            return {
-                'status':False
+                'user_name':req.session['user_name'],
+                'user_id': req.session['user_id']
             }
         else:
+            req.session.delete()
             return {
                 'status':False
             }
@@ -50,7 +47,8 @@ class Auth():
                 }
             else:
 
-                req.session['user_name'] = user_obj.user_name
+                req.session['user_id'] = user_obj.id           # user_id
+                req.session['user_name'] = user_obj.user_name  # user_name
                 req.session['status'] = True
                 return {
                     'status': True
@@ -65,15 +63,16 @@ class Auth():
     @classmethod
     def out_login(cls,req):
         ret_buf = cls.login_status(req)
+
         if ret_buf['status']:
 
-            req.session.delete() # 进行注销
+            req.session.delete()
 
-            if not cls.login_status(req)['status']:
+            #if not cls.login_status(req)['status']:
 
-                return {
-                    'status':True,
-                }
+            return {
+                'status':True,
+            }
 
         else:
             return {
@@ -94,7 +93,7 @@ class Auth():
 
                     try:
 
-                        obj = User.objects.get(user_name = request.session['user_name'])
+                        obj = User.objects.get(id = request.session['user_id'])
 
                     except Exception as e:
 
