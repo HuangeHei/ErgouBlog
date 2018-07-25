@@ -1,13 +1,14 @@
 from django.shortcuts import render,HttpResponse
 from blog.Auth import Auth
 from blog import dataHelper as db
-from blog.helper.logHelper import logHelper
 from blog.helper.upLoad import Upload
 from blog.helper.test_do import Test
 from EgouBlog.settings import FILE_TEMP
 import json
 
-log = logHelper('log')
+import logging
+
+log = logging.getLogger('log')
 
 # Create your views here.
 
@@ -51,7 +52,7 @@ def login(request):
 
             if Auth.is_login(user_name, user_passwd, request)['status']:
 
-                log.w(("用户登录成功 USER_NAME:%s" % user_name), 'info', log.get_access_ip(request))
+                log.info("用户登录成功 USER_NAME:%s" % user_name)
 
                 return HttpResponse(json.dumps({
                     'status': True,
@@ -61,7 +62,7 @@ def login(request):
 
             else:
 
-                log.w("用户名或密码错误", 'error', log.get_access_ip(request))
+                log.error("用户名或密码错误")
 
                 return HttpResponse(json.dumps({
                     'status': False,
@@ -70,7 +71,7 @@ def login(request):
 
         else:
 
-            log.w("用户名密码为空", 'error', log.get_access_ip(request))
+            log.error("用户名密码为空")
 
             return HttpResponse(json.dumps({
                 'status': False,
@@ -79,7 +80,7 @@ def login(request):
 
     else:
 
-        log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
+        log.error("错误的访问，无 GET")
 
         return HttpResponse('not get')
 
@@ -107,7 +108,7 @@ def out(request):
 
         if ret['status']:
 
-            log.w("用户注销成功", 'info', log.get_access_ip(request))
+            log.info("用户注销成功")
 
             return HttpResponse(json.dumps({
                 'status': True
@@ -115,7 +116,7 @@ def out(request):
 
         else:
 
-            log.w(("用户注销失败 错误信息:%s" % ret['error']), 'error', log.get_access_ip(request))
+            log.error("用户注销失败 错误信息:%s" % ret['error'])
 
             return HttpResponse(json.dumps({
                 'sataus': False,
@@ -124,7 +125,7 @@ def out(request):
 
     else:
 
-        log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
+        log.error("错误的访问，无 GET")
 
         return HttpResponse('not get')
 
@@ -155,13 +156,13 @@ def get_login_status(request):
 
         if ret['status']:
 
-            log.w("获取用户登录状态成功", 'info', log.get_access_ip(request))
+            log.info("获取用户登录状态成功")
 
             return HttpResponse(json.dumps(ret))
 
         else:
 
-            log.w("获取用户登录状态失败", 'info', log.get_access_ip(request))
+            log.info("获取用户登录状态失败")
 
             return HttpResponse(json.dumps({
                 'status': False
@@ -169,9 +170,70 @@ def get_login_status(request):
 
     else:
 
-        log.w("错误的访问，无 POST", 'error', log.get_access_ip(request))
+        log.error("错误的访问，无 POST")
 
         return HttpResponse('not post')
+
+
+
+'''搜索文章标题或文章内容
+
+    /search/  post 方式
+
+    参数：{
+             search:搜索的内容
+         }
+
+
+        搜索到内容
+        [
+            {
+                "article_text": "进哥是大傻逼",
+                "article_ding": 1,
+                "article_title": "我是python文章标题",
+                "article_modify_date": "2018-06-07 14:03:21",
+                "user_name": "Huanghei",
+                "article_id": 4,
+                "article_class": "Django 分类",
+                "article_is_save": false,
+                "user_id": 2,
+                "article_pageviews": 1,
+                "article_date": "2018-06-07 14:03:21",
+                "article_class_id": 4
+            }
+        ]
+        搜索不到内容
+        {
+            "error": "搜索不到您要的内容哦~",
+            "status": false
+        }
+'''
+
+
+def serach(request):
+
+    if request.method == 'POST':
+
+        search = request.POST.get('serach', False)
+
+        if search:
+            return HttpResponse(json.dumps(db.search(search)))
+            log.info('获取成功')
+        else:
+
+            log.info("搜索内容为空")
+
+            return HttpResponse(json.dumps({
+                'status': False,
+                'error': '搜索内容为空'
+            }))
+
+    else:
+
+        log.error("错误的访问，无 GET")
+
+        return HttpResponse('not get')
+
 
 
 #------------------------------------------ 用户登录相关 结束 ------------------------------------------------
@@ -197,13 +259,13 @@ def get_index_setting(request):
 
     if request.method == 'GET':
 
-        log.w("获取主页设置", 'info', log.get_access_ip(request))
+        log.info("获取主页设置")
 
         return HttpResponse(db.site_info())
 
     else:
 
-        log.w("错误的访问，无 POST", 'error', log.get_access_ip(request))
+        log.error("错误的访问，无 POST")
 
         return HttpResponse('not post')
 
@@ -229,13 +291,13 @@ def get_user_list(request):
 
     if request.method == 'GET':
 
-        log.w('获取了全部用户列表', 'info', ip=log.get_access_ip(request))
+        log.info('获取了全部用户列表')
 
         return HttpResponse(db.get_user_list())
 
     else:
 
-        log.w("错误的访问，无 POST", 'error', log.get_access_ip(request))
+        log.error("错误的访问，无 POST")
 
         return HttpResponse('not post')
 
@@ -280,18 +342,18 @@ def get_article_class(request):
 
             user_id = request.POST['user_id']
 
-            log.w(('获取用户文章分类USER_ID:%s' % user_id) ,'info',log.get_access_ip(request))
+            log.info('获取用户文章分类USER_ID:%s' % user_id)
 
             return HttpResponse(db.get_article_class(user_id = user_id))
 
         else:
 
-            log.w('获取所有用户文章分类','info', log.get_access_ip(request))
+            log.info('获取所有用户文章分类')
 
             return HttpResponse(db.get_article_class())
     else:
 
-        log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
+        log.error("错误的访问，无 GET")
 
         return HttpResponse('not get')
 
@@ -345,7 +407,7 @@ def get_article(request):
 
             user_id = request.POST['user_id']
 
-            log.w(('获取用户所有文章 USER_ID:%s' % user_id), 'info', log.get_access_ip(request))
+            log.info('获取用户所有文章 USER_ID:%s' % user_id)
 
             return HttpResponse(db.get_article(user_id = user_id))
 
@@ -356,13 +418,13 @@ def get_article(request):
 
                 article_id = request.POST.get('article_id',False)
 
-                log.w(('获取文章 ARTICLE_ID:%s' % article_id), 'info', log.get_access_ip(request))
+                log.info('获取文章 ARTICLE_ID:%s' % article_id)
 
                 return HttpResponse(db.get_article(article_id))
 
             except Exception as E:
 
-                log.w(("获取单个文章出错 错误信息:%s" % E),'error', log.get_access_ip(request))
+                log.error("获取单个文章出错 错误信息:%s" % E)
 
                 return HttpResponse(json.dumps({
                     'status':False,
@@ -373,13 +435,13 @@ def get_article(request):
 
             try:
 
-                log.w(('获取文章获取全部文章'), 'info', log.get_access_ip(request))
+                log.info('获取文章获取全部文章')
 
                 return HttpResponse(db.get_article())
 
             except Exception as E:
 
-                log.w(("获取全部文章错误 错误信息:%s" % E),'error', log.get_access_ip(request))
+                log.error("获取全部文章错误 错误信息:%s" % E)
 
                 return HttpResponse(json.dumps({
                     'status':False,
@@ -391,7 +453,7 @@ def get_article(request):
 
     else:
 
-        log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
+        log.error("错误的访问，无 GET")
 
         return HttpResponse("not get")
 
@@ -420,13 +482,13 @@ def get_user_site_setting(request):
 
             user_id = request.POST['user_id']
 
-            log.w(('获取用户设置 USER_ID:%s' % user_id), 'info', log.get_access_ip(request))
+            log.info('获取用户设置 USER_ID:%s' % user_id)
 
             return HttpResponse(db.get_user_setting(user_id))
 
         else:
 
-            log.w('获取用户设置失败，因为没有USER_ID', 'error', log.get_access_ip(request))
+            log.error('获取用户设置失败，因为没有USER_ID')
 
             return HttpResponse(json.dumps({
                 'status':False,
@@ -436,7 +498,7 @@ def get_user_site_setting(request):
 
     else:
 
-        log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
+        log.error("错误的访问，无 GET")
 
         return HttpResponse('not get')
 
@@ -478,14 +540,14 @@ def upload_file(request):
 
         except Exception as E:
 
-            log.w('写入失败 原因:%s' % E,'error',log.get_access_ip(request))
+            log.error('写入失败 原因:%s' % E)
 
             return HttpResponse(json.dumps({
                 'status':False,
                 'error':'写入失败 原因:%s' % E
             }))
 
-        log.w('文件上传成功 %s' % request.session['user_name'], 'error', log.get_access_ip(request))
+        log.error('文件上传成功 %s' % request.session['user_name'])
 
         return HttpResponse(json.dumps({
             'status':True,
@@ -494,7 +556,7 @@ def upload_file(request):
 
     else:
 
-        log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
+        log.error("错误的访问，无 GET")
 
         return HttpResponse('not get')
 
@@ -536,7 +598,7 @@ def set_index(request):
             }
         except Exception as E:
 
-            log.w("信息POST不完整", 'error', log.get_access_ip(request))
+            log.error("信息POST不完整")
 
             return HttpResponse(json.dumps({
                 'status': False,
@@ -549,7 +611,7 @@ def set_index(request):
 
     else:
 
-        log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
+        log.error("错误的访问，无 GET")
 
         return HttpResponse('not get')
 
@@ -594,7 +656,7 @@ def set_user_site(request):
             }
         except Exception as E:
 
-            log.w("信息POST不完整", 'error', log.get_access_ip(request))
+            log.error("信息POST不完整")
 
             return HttpResponse(json.dumps({
                 'status': False,
@@ -608,7 +670,7 @@ def set_user_site(request):
 
     else:
 
-        log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
+        log.error("错误的访问，无 GET")
 
         return HttpResponse('not get')
 
@@ -651,7 +713,7 @@ def set_user(request):
 
             else:
 
-                log.w("信息POST不完整", 'error', log.get_access_ip(request))
+                log.error("信息POST不完整")
 
                 return HttpResponse(json.dumps({
                     'status': False,
@@ -660,7 +722,7 @@ def set_user(request):
 
     else:
 
-        log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
+        log.error("错误的访问，无 GET")
 
         return HttpResponse('not get')
 
@@ -713,7 +775,7 @@ def class_manage(request):
 
     else:
 
-        log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
+        log.error("错误的访问，无 GET")
 
         return HttpResponse('not get')
 
@@ -771,7 +833,7 @@ def article_manage(request):
 
     else:
 
-        log.w("错误的访问，无 GET", 'error', log.get_access_ip(request))
+        log.error("错误的访问，无 GET")
 
         return HttpResponse('not get')
 

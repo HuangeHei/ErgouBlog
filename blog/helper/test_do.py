@@ -1,5 +1,6 @@
-from blog.helper.logHelper import logHelper
-log = logHelper('log')
+import logging
+
+log = logging.getLogger('system')
 
 def Test(req,do_list):
 
@@ -11,7 +12,7 @@ def Test(req,do_list):
         print(dic,list(do_list.keys()))
         if dic['do'] not in list(do_list.keys()):
 
-            log.w("do 错误", 'error', log.get_access_ip(req))
+            log.error("do 错误", 'error')
 
             return {
                 'status': False,
@@ -20,7 +21,7 @@ def Test(req,do_list):
 
     except Exception as E:
 
-        log.w("没有do，不知道如何操作", 'error', log.get_access_ip(req))
+        log.error("没有do，不知道如何操作")
 
         return {
             'status': False,
@@ -35,7 +36,7 @@ def Test(req,do_list):
 
     except Exception as E:
 
-        log.w('POST信息不完整', 'error', log.get_access_ip(req))
+        log.error('POST信息不完整')
 
         return {
             'status': False,

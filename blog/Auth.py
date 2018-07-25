@@ -1,9 +1,13 @@
 from blog.models import User
 from django.shortcuts import render,HttpResponse
-from blog.helper.logHelper import logHelper
 import json
-log_system = logHelper('system')
-log_server = logHelper('log')
+import logging
+
+log = logging.getLogger('system')
+
+
+log_system = logging.getLogger('system')
+log_server = logging.getLogger('log')
 
 
 
@@ -97,7 +101,7 @@ class Auth():
 
                     except Exception as e:
 
-                        log_server.w('用户不存在 进入用户%s' % request.session['user_name'] ,'error',request)
+                        log_server.error('用户不存在 进入用户%s' % request.session['user_name'])
 
                         return HttpResponse(json.dumps({
                             'status':False,

@@ -22,12 +22,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-
+SECRET_KEY = '9%%f+swemuc-fq+^!z!#3)2o8or7o4yt!x4ick0o_n0_4_0o+r'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['www.awanmo.com','127.0.0.1']
+ALLOWED_HOSTS = ['www.awanmo.com','127.0.0.1','www.ergouz.net']
 
 
 # Application definition
@@ -214,7 +214,7 @@ LOGGING = {
             'encoding':'utf-8'
         },
         'system': {
-            'level': 'WARNING',  # 日志分发级别
+            'level': 'INFO',  # 日志分发级别
             'class': 'logging.handlers.RotatingFileHandler',   # 日志分发方式或日志切割方式
             'filename': './system.log',                # 系统错误，请移交到别的盘
             'maxBytes': 1024 * 1024 * 5,                          # 5 MB
@@ -245,8 +245,9 @@ LOGGING = {
 }
 
 
-CORS_ORIGIN_WHITELIST=(
+CORS_ORIGIN_WHITELIST = (
     'www.awanmo.com',#请求的域名
+    'www.ergouz.net',
     'localhost:8080',
     '127.0.0.1:8080'
 )

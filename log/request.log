@@ -1073,3 +1073,8 @@
 2018-07-13 00:48:32,176 INFO     C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /login/ HTTP/1.1" 200 55
 2018-07-13 00:48:39,091 INFO     C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /out/ HTTP/1.1" 200 16
 2018-07-13 00:48:43,011 INFO     C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /class_manage/ HTTP/1.1" 200 66
+2018-07-25 18:39:41,555 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /search/ HTTP/1.1" 500 27
+2018-07-25 18:40:02,886 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /search/ HTTP/1.1" 500 72980
+2018-07-25 18:40:18,599 INFO     C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /search/ HTTP/1.1" 200 390
+2018-07-25 18:40:31,691 INFO     C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /get_article/ HTTP/1.1" 200 777
+2018-07-25 18:40:40,072 INFO     C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /get_article/ HTTP/1.1" 200 1505

@@ -171,6 +171,40 @@
 '''
 
 
+'''搜索文章标题或文章内容
+
+    /search/  post 方式
+
+    参数：{
+             search:搜索的内容
+         }
+
+
+        搜索到内容
+        [
+            {
+                "article_text": "进哥是大傻逼",
+                "article_ding": 1,
+                "article_title": "我是python文章标题",
+                "article_modify_date": "2018-06-07 14:03:21",
+                "user_name": "Huanghei",
+                "article_id": 4,
+                "article_class": "Django 分类",
+                "article_is_save": false,
+                "user_id": 2,
+                "article_pageviews": 1,
+                "article_date": "2018-06-07 14:03:21",
+                "article_class_id": 4
+            }
+        ]
+        搜索不到内容
+        {
+            "error": "搜索不到您要的内容哦~",
+            "status": false
+        }
+'''
+
+
 '''
     /get_user_site_setting/  post 方式
     

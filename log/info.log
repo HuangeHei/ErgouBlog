@@ -216,3 +216,5 @@
 2018-07-13 00:44:28,635 ERROR    127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:485] 文件上传成功 Huanghei
 2018-07-13 00:48:32,176 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:54] 用户登录成功 USER_NAME:Huanghei
 2018-07-13 00:48:39,090 INFO     127.0.0.1 D:\source\ErgouBlog\blog\views.py[line:110] 用户注销成功
+2018-07-25 18:40:31,682 INFO     获取用户所有文章 USER_ID:1
+2018-07-25 18:40:40,059 INFO     获取文章获取全部文章

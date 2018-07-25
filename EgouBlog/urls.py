@@ -30,6 +30,7 @@ urlpatterns = [
     path('login/', blog.login),
     path('out/', blog.out),
     path('get_login/', blog.get_login_status),
+    path('search/', blog.serach),
 
     # set
 
