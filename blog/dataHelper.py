@@ -1,7 +1,9 @@
 from blog.models import *
 from django.db.models import Q
+from blog.Auth import Auth
 import json
 import logging
+
 
 log = logging.getLogger('system')
 
@@ -12,6 +14,45 @@ log = logging.getLogger('system')
     ArticleClass
     User
 '''
+def create(user_info):
+    '''
+    :param
+        user_name:'ccc'
+        user_passwd:'ccc'
+    :return: True and False
+    '''
+    create_ret = Auth.create_user(User,user_info)
+
+    if create_ret['status'] :
+        ret_user = create_ret['model']
+        try:
+            def_user_site = UserSite.objects.create(blog_name = '%s的博客' % user_info['user_name'],
+                                                    blog_info = '还没有博客简介哦~')
+
+            ret_user.user_site = def_user_site  # 更新
+
+            def_category = ArticleClass.objects.create(class_name = '%s的默认分类' % user_info['user_name'])
+
+            def_article = Article.objects.create(article_title = '第一个文章哦',
+                                                 article_text = '这是你的第一篇文章哦~要加油~',
+                                                 article_class = def_category
+                                                 )
+
+            ret_user.user_article.add(def_article)
+            ret_user.user_article_class.add(def_category)
+
+            ret_user.save()
+
+        except Exception as E:
+
+            log.error('%s用户添加失败,错误信息:%s' % (user_info['user_name'],E))
+
+            return False
+
+        return True
+
+    else:
+        return False
 
 
 def ret_article(ret_list):
@@ -275,16 +316,35 @@ def set_user_site(user,dic):
     }
 
 
-def update_user(user_id,user_passwd = None,user_head = None):
+def update_user(dic):
 
-    obj = User.objects.filter(id = user_id)
+    obj = User.objects.get(id = dic['user_id'])
 
     if obj:
+        if dic['do'] ==  're_passwd':
 
+            return Auth.re_passwd(obj,dic['old_passwd'],dic['new_passwd'])
+
+        elif dic['do'] == 're_head':
+
+            if len(dic['user_head']) != 0:
+                obj.user_head = dic['user_head']
+                obj.save()
+                return {
+                    'status': True,
+                }
+            else:
+                return {
+                    'status':False,
+                    'error':'头像为空'
+                }
+
+
+        '''
         try:
             if user_passwd is not None:
 
-                obj.update(user_passwd = user_passwd)
+                Auth.re_passwd(obj,old_passwd,new_passwd)
 
             elif user_head is not None:
 
@@ -302,7 +362,7 @@ def update_user(user_id,user_passwd = None,user_head = None):
 
         return {
             'status': True,
-        }
+        }'''
 
     else:
 

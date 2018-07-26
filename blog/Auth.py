@@ -1,17 +1,108 @@
 from blog.models import User
 from django.shortcuts import render,HttpResponse
+from django.contrib.auth.hashers import make_password, check_password
 import json
 import logging
 
 log = logging.getLogger('system')
 
-
 log_system = logging.getLogger('system')
 log_server = logging.getLogger('log')
 
 
-
 class Auth():
+
+    @classmethod
+    def create_user(cls,user_model,user_info):
+        '''
+        :param user_model: model
+        :param user_info:{
+                 user_name:'user_name',
+                 user_passwd:'user_passwd',
+               }
+        :return:{
+            'status':false,
+            'error':'重复的用户'
+        }
+        '''
+
+        check_rep = user_model.objects.filter(user_name = user_info['user_name']) #检查重复
+
+        if len(check_rep) == 0 :
+
+            passwd = make_password(user_info['user_passwd'],None,'pbkdf2_sha256')
+
+            try:
+
+                ret = user_model.objects.create(user_name = user_info['user_name'],user_passwd = passwd)  # 检查重复
+                return {
+                    'status':True,
+                    'model':ret
+                }
+
+            except Exception as E:
+
+                log_system.error('发生错误%s' % E)
+
+                return {
+                    'status': False,
+                    'error': E
+                }
+
+        else:
+            return {
+                'status':False,
+                'error':'重复的用户'
+            }
+
+    @classmethod
+    def re_passwd(cls,user,old_passwd,new_passwd):
+        '''
+        :param user: user_model
+        :param passwd:
+        :return:false
+        '''
+
+        if len(new_passwd) != 0:
+
+
+            if check_password(old_passwd,user.user_passwd):
+
+                try:
+
+                    passwd = make_password(new_passwd, None, 'pbkdf2_sha256')
+                    user.user_passwd = passwd
+                    user.save()
+
+                    return {
+                        'status': True,
+                    }
+
+                except Exception as E:
+
+                    log_system.error('发生错误%s' % E)
+
+                    return {
+                        'status': False,
+                        'error': E
+                    }
+
+            else:
+
+                return {
+                    'status': False,
+                    'error': '原始密码错误'
+                }
+
+
+
+        else:
+            return {
+                'status': False,
+                'error': '新密码为空'
+            }
+
+
 
     @classmethod
     def login_status(cls,req):
@@ -34,28 +125,36 @@ class Auth():
         if user_name and passwd:
 
             try:
-                user_obj = User.objects.get(user_name = user_name,user_passwd = passwd)
+                print('user_name ',user_name )
+                user_obj = User.objects.get(user_name = user_name)
 
             except Exception as E:
 
                 return {
                     'status':False,
-                    'error':'账号或密码错误!'
+                    'error':'无此用户'
                 }
 
 
-            if cls.login_status(req)['status']:# 检查后台session是否设置了
+            ret = check_password(passwd, user_obj.user_passwd)
+            if ret:
+                if cls.login_status(req)['status']:# 检查后台session是否设置了
 
-                return {
-                    'status':True
-                }
+                    return {
+                        'status':True
+                    }
+                else:
+
+                    req.session['user_id'] = user_obj.id           # user_id
+                    req.session['user_name'] = user_obj.user_name  # user_name
+                    req.session['status'] = True
+                    return {
+                        'status': True
+                    }
             else:
-
-                req.session['user_id'] = user_obj.id           # user_id
-                req.session['user_name'] = user_obj.user_name  # user_name
-                req.session['status'] = True
                 return {
-                    'status': True
+                    'status': False,
+                    'error': '账号或密码错误'
                 }
         else:
 

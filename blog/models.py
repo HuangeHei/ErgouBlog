@@ -3,12 +3,6 @@ from django.db import models
 # Create your models here.
 
 
-
-from django.db import models
-
-# Create your models here.
-
-
 class UserSite(models.Model):
 
     blog_name = models.CharField(max_length=30,null=False,blank=False)                           # 用户博客名称
@@ -59,10 +53,10 @@ class User(models.Model):
 
     user_name = models.CharField(max_length=1024,null=False,blank=False)      # 用户名
     user_passwd = models.CharField(max_length=1024, null=False, blank=False)  # 用户密码
-    user_head  = models.CharField(max_length=1024,null=False,blank=False)     # 用户头像
+    user_head  = models.CharField(max_length=1024,default='def.jpg')          # 用户头像
     user_article = models.ManyToManyField(Article,related_name="User")                            # 用户文章
     user_article_class = models.ManyToManyField(ArticleClass,related_name="User")                 # 用户文章分类
-    user_site = models.ForeignKey(UserSite,related_name="User",on_delete = models.CASCADE)        # 用户主页设置
+    user_site = models.ForeignKey(UserSite,related_name="User",on_delete = models.CASCADE,null=True,blank=True)        # 用户主页设置
 
 
     def __str__(self):

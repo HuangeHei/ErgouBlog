@@ -1,3 +1,13 @@
-2018-06-11 11:25:29,773 ERROR    D:\ergou\EgouBlog\blog\helper\logHelper.py[line:28] log_name ����Ϊ��,logû�б���ȷ��ʼ��
 2018-07-25 18:40:31,689 INFO     D:\ergou\EgouBlog\blog\dataHelper.py[line:144] 获取文章成功
 2018-07-25 18:40:40,070 INFO     D:\ergou\EgouBlog\blog\dataHelper.py[line:144] 获取文章成功
+2018-07-26 23:34:50,261 ERROR    D:\ergou\ErgouBlog\blog\Auth.py[line:45] 发生错误NOT NULL constraint failed: blog_user.user_site_id
+2018-07-26 23:35:10,205 ERROR    D:\ergou\ErgouBlog\blog\Auth.py[line:45] 发生错误NOT NULL constraint failed: blog_user.user_site_id
+2018-07-26 23:35:47,619 ERROR    D:\ergou\ErgouBlog\blog\Auth.py[line:45] 发生错误NOT NULL constraint failed: blog_user.user_site_id
+2018-07-26 23:36:45,425 ERROR    D:\ergou\ErgouBlog\blog\Auth.py[line:45] 发生错误NOT NULL constraint failed: blog_user.user_site_id
+2018-07-26 23:38:22,246 ERROR    D:\ergou\ErgouBlog\blog\Auth.py[line:45] 发生错误NOT NULL constraint failed: blog_user.user_site_id
+2018-07-26 23:43:07,251 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:45] Huanghei用户添加失败,错误信息:'dict' object has no attribute 'user_article'
+2018-07-26 23:43:47,131 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:45] Huanghei用户添加失败,错误信息:'dict' object has no attribute 'user_article'
+2018-07-26 23:45:22,378 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:45] Huanghei用户添加失败,错误信息:'dict' object has no attribute 'user_article'
+2018-07-26 23:46:06,319 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:45] test用户添加失败,错误信息:'dict' object has no attribute 'user_article'
+2018-07-26 23:48:45,967 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:46] test3用户添加失败,错误信息:'User' object has no attribute 'update'
+2018-07-27 00:50:32,138 ERROR    D:\ergou\ErgouBlog\blog\helper\test_do.py[line:39] POST信息不完整

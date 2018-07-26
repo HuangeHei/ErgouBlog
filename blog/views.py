@@ -3,7 +3,7 @@ from blog.Auth import Auth
 from blog import dataHelper as db
 from blog.helper.upLoad import Upload
 from blog.helper.test_do import Test
-from EgouBlog.settings import FILE_TEMP
+from ErgouBlog.settings import FILE_TEMP
 import json
 
 import logging
@@ -50,7 +50,10 @@ def login(request):
 
         if user_name and user_passwd:
 
-            if Auth.is_login(user_name, user_passwd, request)['status']:
+            ret_login = Auth.is_login(user_name, user_passwd, request)
+
+
+            if ret_login['status']:
 
                 log.info("用户登录成功 USER_NAME:%s" % user_name)
 
@@ -62,11 +65,11 @@ def login(request):
 
             else:
 
-                log.error("用户名或密码错误")
+                log.error(ret_login['error'])
 
                 return HttpResponse(json.dumps({
                     'status': False,
-                    'error': '用户名或密码错误!'
+                    'error': ret_login['error']
                 }))
 
         else:
@@ -502,6 +505,35 @@ def get_user_site_setting(request):
 
         return HttpResponse('not get')
 
+def reg_user(request):
+
+    if request.method == 'POST':
+
+        if request.POST.get('user_name', False) and request.POST.get('user_passwd', False):
+
+            ret = db.create({
+                'user_name':request.POST.get('user_name', False),
+                'user_passwd':request.POST.get('user_passwd', False)
+            })
+
+            return HttpResponse(ret)
+
+        else:
+
+            log.error('创建用户失败，检查post数据')
+
+            return HttpResponse(json.dumps({
+                'status': False,
+                'error': '创建用户失败，检查post数据'
+            }))
+
+
+    else:
+
+        log.error("错误的访问，无 GET")
+
+        return HttpResponse('not get')
+
 #----------------------------------------- 前端展示,无需权限 结束 ---------------------------------------------
 
 #----------------------------------------- 前端后台设置,需要权限 开始 ---------------------------------------------
@@ -679,8 +711,9 @@ def set_user_site(request):
     /set_user/  post  方式
     
     参数 {
-        user_passwd  # 修改user_passwd
-        或者
+        do:'re_passwd' or 're_head',
+        old_passwd  # 旧密码
+        new_passwd  # 新密码
         user_head    # 或者修改user_head
     }
 
@@ -702,23 +735,19 @@ def set_user(request):
 
     if request.method == 'POST':
 
+        t = Test(request, {'re_passwd': ['old_passwd','new_passwd'],
+                           're_head': ['user_head']}
+                 )
 
-            if request.POST.get('user_passwd',None) is not None:
+        if t['status'] == True:
 
-                return HttpResponse(json.dumps(db.update_user(request.session['user_id'], user_passwd=request.POST['user_passwd'])))
+            dic = t['dic']
 
-            elif request.POST.get('user_head',None) is not None:
+            return HttpResponse(json.dumps(db.update_user(dic)))
 
-                return HttpResponse(json.dumps(db.update_user(request.session['user_id'], user_head=request.POST['user_head'])))
+        else:
+            return HttpResponse(json.dumps(t))
 
-            else:
-
-                log.error("信息POST不完整")
-
-                return HttpResponse(json.dumps({
-                    'status': False,
-                    'error': '信息POST不完整'
-                }))
 
     else:
 

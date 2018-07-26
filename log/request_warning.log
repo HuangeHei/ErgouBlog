@@ -396,3 +396,15 @@
 2018-07-13 00:36:35,348 WARNING  C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /login/ HTTP/1.1" 400 94470
 2018-07-25 18:39:41,555 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /search/ HTTP/1.1" 500 27
 2018-07-25 18:40:02,886 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python35\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /search/ HTTP/1.1" 500 72980
+2018-07-26 22:43:14,498 WARNING  C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET / HTTP/1.1" 404 3603
+2018-07-26 22:43:14,503 WARNING  C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET / HTTP/1.1" 404 3603
+2018-07-26 22:43:14,506 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET / HTTP/1.1" 500 59
+2018-07-26 23:34:24,240 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /reg_user/ HTTP/1.1" 500 71273
+2018-07-26 23:34:50,624 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /reg_user/ HTTP/1.1" 500 71420
+2018-07-26 23:35:10,562 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /reg_user/ HTTP/1.1" 500 71360
+2018-07-26 23:35:47,983 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /reg_user/ HTTP/1.1" 500 71381
+2018-07-26 23:43:58,830 WARNING  C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /favicon.ico HTTP/1.1" 404 3763
+2018-07-27 00:28:47,690 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /set_user/ HTTP/1.1" 500 73142
+2018-07-27 00:30:28,418 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /set_user/ HTTP/1.1" 500 72829
+2018-07-27 00:48:36,405 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "POST /set_user/ HTTP/1.1" 500 80596
+2018-07-27 00:53:20,338 ERROR    C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\servers\basehttp.py[line:124] "GET /admin/blog/ HTTP/1.1" 500 59
