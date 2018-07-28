@@ -297,14 +297,15 @@
     }
 '''
 
-''' 修改用户密码
+''' 修改用户密码或头像
 
     /set_user/  post  方式
-    
+
     参数 {
-        user_passwd 
-        或者
-        user_head
+        do:'re_passwd' or 're_head',
+        old_passwd   # 旧密码
+        new_passwd   # 新密码
+        user_head    # 或者修改user_head
     }
 
     返回值 成功
@@ -329,8 +330,8 @@
 
     参数 {
         'do':'del/update/add'
-        'class_id':'1'    //如果是add  不需要传入     update时需要传入 按照class_id 来更改class_name，class_id 本身不可以改变
-        'class_name':'2'  //如果是del  不需要传入  update时需要传入
+        'class_id':'1'    //如果是add  不需要传入   update时需要传入 按照class_id 来更改class_name，class_id 本身不可以改变
+        'class_name':'2'  //如果是del  不需要传入   update时需要传入
     }
 
     返回值 成功

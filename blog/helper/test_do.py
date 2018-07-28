@@ -3,6 +3,12 @@ import logging
 log = logging.getLogger('system')
 
 def Test(req,do_list):
+    '''
+    :param req: request
+    :param do_list: 操作列表
+    :return: 返回dict
+    此函数只对检测登录权限的视图函数使用
+    '''
 
     try:
         dic = {

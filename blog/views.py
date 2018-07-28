@@ -207,8 +207,8 @@ def get_login_status(request):
         ]
         搜索不到内容
         {
-            "error": "搜索不到您要的内容哦~",
-            "status": false
+            "status": false,
+            "error": "搜索不到您要的内容哦~",       
         }
 '''
 
@@ -706,14 +706,14 @@ def set_user_site(request):
 
         return HttpResponse('not get')
 
-''' 修改用户密码
+''' 修改用户密码或头像
 
     /set_user/  post  方式
     
     参数 {
         do:'re_passwd' or 're_head',
-        old_passwd  # 旧密码
-        new_passwd  # 新密码
+        old_passwd   # 旧密码
+        new_passwd   # 新密码
         user_head    # 或者修改user_head
     }
 
