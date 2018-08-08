@@ -197,11 +197,11 @@ def get_article(article_id = False,user_id = False):
             return json.dumps(ret)
 
     else:
-
-        return {
+        print('123')
+        return json.dumps({
             'status': False,
-            'error': 'ret_article 函数发生错误'
-        }
+            'error': 'ret_article 函数发生错误(程序判断为没有此文章)'
+        })
 
         log.error('ret_article 函数发生错误')
 

@@ -1,6 +1,6 @@
 import logging
-
 log = logging.getLogger('system')
+
 
 def Test(req,do_list):
     '''

@@ -11,3 +11,5 @@
 2018-07-26 23:46:06,319 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:45] test用户添加失败,错误信息:'dict' object has no attribute 'user_article'
 2018-07-26 23:48:45,967 ERROR    D:\ergou\ErgouBlog\blog\dataHelper.py[line:46] test3用户添加失败,错误信息:'User' object has no attribute 'update'
 2018-07-27 00:50:32,138 ERROR    D:\ergou\ErgouBlog\blog\helper\test_do.py[line:39] POST信息不完整
+2018-08-08 10:45:45,974 INFO     D:\ergou\EgouBlog\blog\dataHelper.py[line:185] 获取文章成功
+2018-08-08 10:45:51,956 INFO     D:\ergou\EgouBlog\blog\dataHelper.py[line:185] 获取文章成功

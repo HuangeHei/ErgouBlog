@@ -291,6 +291,7 @@ def get_index_setting(request):
 
 def get_user_list(request):
 
+    '''request.method.lower() 可以获取到request请求方式'''
 
     if request.method == 'GET':
 
