@@ -5,7 +5,7 @@ from blog.helper.upLoad import Upload
 from blog.helper.test_do import Test
 from ErgouBlog.settings import FILE_TEMP
 import json
-
+from django.views.generic import ListView
 import logging
 
 log = logging.getLogger('log')
@@ -40,6 +40,8 @@ log = logging.getLogger('log')
             'error':'用户名密码为空!'
         }
 '''
+
+
 
 
 def login(request):
@@ -284,7 +286,8 @@ def get_index_setting(request):
         [
             {
                 "user_id": 1,
-                "user_name": "huanghei"
+                "user_name": "huanghei",
+                "user_head":"123.jpg"
             }
         ]
 """
@@ -294,10 +297,12 @@ def get_user_list(request):
     '''request.method.lower() 可以获取到request请求方式'''
 
     if request.method == 'GET':
+        
+        user_id = request.GET.get('user_id',False)
 
         log.info('获取了全部用户列表')
 
-        return HttpResponse(db.get_user_list())
+        return HttpResponse(db.get_user_list(user_id))
 
     else:
 

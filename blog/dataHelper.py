@@ -107,18 +107,28 @@ def search(search_text):
 
 
 
-def get_user_list():
+def get_user_list(user_id):
 
     ret = []
-
-    user_list = User.objects.all()
-
-    for item in user_list:
-        ret.append({
-            'user_id': item.id,
-            'user_name':item.user_name,
-        })
-
+    if not user_id:
+        user_list = User.objects.all()
+    else:
+        user_list = User.objects.filter(id = user_id)
+    
+    if len(user_list) != 0 :
+        
+        for item in user_list:
+            ret.append({
+                'user_id': item.id,
+                'user_name':item.user_name,
+                'user_head':item.user_head
+            })
+    else:
+        
+        ret = {
+            'status':False,
+            'error':'错误无用户或提供的user_id 不正确'
+        }
 
 
     return json.dumps(ret)
@@ -197,7 +207,7 @@ def get_article(article_id = False,user_id = False):
             return json.dumps(ret)
 
     else:
-        print('123')
+
         return json.dumps({
             'status': False,
             'error': 'ret_article 函数发生错误(程序判断为没有此文章)'

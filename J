@@ -86,12 +86,13 @@
     返回所有用户
 
     /get_user_list/  get 方式
-
+    参数 user_id 可有可无
     返回值
         [
             {
                 "user_id": 1,
-                "user_name": "huanghei"
+                "user_name": "huanghei",
+                "user_head":"123.jpg"
             }
         ]
 """
