@@ -20,7 +20,7 @@ from blog import views as blog
 urlpatterns = [
 
     # get
-
+    
     path('admin/', admin.site.urls),
     path('get_user_list/', blog.get_user_list),
     path('get_index_setting/', blog.get_index_setting),
@@ -42,4 +42,5 @@ urlpatterns = [
     path('article_manage/', blog.article_manage),
     path('upload/', blog.upload_file),
 
+    path('', blog.Index.as_view()),
 ]

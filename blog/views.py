@@ -5,7 +5,7 @@ from blog.helper.upLoad import Upload
 from blog.helper.test_do import Test
 from ErgouBlog.settings import FILE_TEMP
 import json
-from django.views.generic import ListView
+from django.views import View
 import logging
 
 log = logging.getLogger('log')
@@ -13,6 +13,17 @@ log = logging.getLogger('log')
 # Create your views here.
 
 #----------------------------------------- 用户登录相关 开始 -------------------------------------------------
+
+class Index(View):
+    def get(self,request): # index
+        return render(request,"index.html")
+    def post(self,request):
+        
+        log.error("错误的访问，无 POST")
+
+        return HttpResponse('not post')
+
+
 
 ''' 用户登录
 
@@ -219,7 +230,7 @@ def serach(request):
 
     if request.method == 'POST':
 
-        search = request.POST.get('serach', False)
+        search = request.POST.get('search', False)
 
         if search:
             return HttpResponse(json.dumps(db.search(search)))

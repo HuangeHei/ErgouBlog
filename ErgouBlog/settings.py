@@ -27,7 +27,7 @@ SECRET_KEY = '9%%f+swemuc-fq+^!z!#3)2o8or7o4yt!x4ick0o_n0_4_0o+r'
  # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.awanmo.com','127.0.0.1','www.ergouz.net']
+ALLOWED_HOSTS = ['www.ergouz.net','api.ergouz.net','127.0.0.1']
 
 
  # Application definition
@@ -59,7 +59,7 @@ ROOT_URLCONF = 'ErgouBlog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ["templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,6 +129,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
  # FILE_TEMP
 
@@ -246,7 +248,7 @@ LOGGING = {
 
 
 CORS_ORIGIN_WHITELIST = (
-    'www.awanmo.com',#请求的域名
+    'api.ergouz.net',
     'www.ergouz.net',
     'localhost:8080',
     '127.0.0.1:8080'
